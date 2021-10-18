@@ -1,5 +1,34 @@
-<swiper [config]="config" [(index)]="index">
-  <div>
-    Swiper slide content
+
+<swiper *ngIf="config && movies && movies.length" [config]="config">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide"  *ngFor="let movie of movies" >
+      <div class="slide-container" [ngStyle]="{'background-image': 'url(' + movie.backdrop_path + ')'}">
+        <div class="slide-content">
+          <div class="slide-content__infor">
+            <h3 class="slide-content__infor__title">
+              {{ movie.title }}
+            </h3>
+            <div class="slide-content__infor__overview">
+              {{ movie.overview }}
+            </div>
+            <div class="slide-content__infor__button">
+              <button class="slide-content__infor__button--watchnow">
+                Watch Now
+              </button> 
+              <button class="slide-content__infor__button--trailer" (click)="openTrailer(movie.id)">Watch Trailer</button>
+            </div>
+          </div>
+          <div class="slide-content__poster">
+            <img src={{appConfig.W500IMAGE(movie.poster_path)}} alt="">
+          </div>
+          <div class="slide-content__modaltrailer trailer-modal-{{movie.id}}">
+            <div class="slide-content__modaltrailer--video">
+              <div class="slide-content__modaltrailer--video--close" (click)="closeTrailerModal(movie.id)"><i class='bx bx-x'></i></div>
+              <iframe [src]="movie.trailer | safe: 'resourceUrl'" id="ytplayer" frameborder="0" width="100%" height="100%"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </swiper>

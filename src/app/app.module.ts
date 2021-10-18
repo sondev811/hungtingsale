@@ -21,8 +21,7 @@ import { SlidesModule } from './components/slides/slides.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    SlidesModule
+    HttpClientModule
   ],
   providers: [HttpClientService],
   bootstrap: [AppComponent]

@@ -1,10 +1,12 @@
 @import '../../../../scss/mixin.scss';
 @import '../../../../scss/variable.scss';
 .header-container {
-    padding: 0px 150px;
+    padding: 0px 9.375rem;
     position: fixed;
+    z-index: 1000;
     top: 0;
     left: 0;
+    transition: .3s all;
     .header-wrap {
         @include flex(center, space-between);
         padding: 0 2rem;
@@ -13,7 +15,7 @@
         }
     }
     .logo-container {
-        padding: 20px 0;
+        padding: 1.875rem 0;
         a {
             color: #3D9970;
             font-weight: 600;
@@ -66,5 +68,11 @@
                 margin: 0 2rem;
             }
         }
+    }
+}
+.shrink {
+    background-color: $background-body!important;
+    .logo-container {
+        padding: 8px 0;
     }
 }
