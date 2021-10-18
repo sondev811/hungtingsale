@@ -1,10 +1,20 @@
-<header class="header-container container">
+<header class="header-container container-fluid" id="headerShrink">
   <div class="header-wrap row">
     <div class="logo-container">
-      <a routerLink="/home">Hunting Sale</a> 
+      <a routerLink="/home">sMovies</a> 
     </div>
     <nav class="menu-container">
-      <ul><li><a href="https://shopee.vn/m/ma-giam-gia">Voucher</a></li></ul>
+      <ul>
+        <li [ngClass]="{active: activeMenu === menu.HOME}" (click)="clickMenu(menu.HOME)">
+          <a>{{menu.HOME}}</a>
+        </li>
+        <li [ngClass]="{active: activeMenu === menu.MOVIES}" (click)="clickMenu(menu.MOVIES)">
+          <a>{{menu.MOVIES}}</a>
+        </li>
+        <li [ngClass]="{active: activeMenu === menu.TV_SERIES}" (click)="clickMenu(menu.TV_SERIES)">
+          <a>{{menu.TV_SERIES}}</a>
+        </li>
+      </ul>
     </nav>
   </div>
 </header>

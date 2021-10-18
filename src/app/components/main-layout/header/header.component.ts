@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MENU } from 'src/app/constants/base.constants';
+
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  menu = MENU;
+  activeMenu = MENU.HOME;
   constructor() { }
 
   ngOnInit() {
+    this.shrinkHeader();
   }
 
+  clickMenu(type: string) {
+    this.activeMenu = type;
+  }
+
+  shrinkHeader() {
+    const header = document.getElementById('headerShrink');
+    if (header) {
+      window.addEventListener('scroll', () => {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+          header.classList.add('shrink');
+          console.log('scroll down');
+        } else {
+          console.log('scroll up');
+          header.classList.remove('shrink');
+        }
+      });
+    }
+  }
 }

@@ -1,7 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@import './scss/mixin.scss';
+@import './scss/variable.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif!important;
+    background-color: $background-body!important;
+    color: $text-color!important;
+    @include mobile {
+        margin-bottom: 3rem;
+    }
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+    @include tablet {
+        font-size: 80%;
+    }
+
+    @include mobile {
+        font-size: 60%;
+    }
+}
+
 a {
     text-decoration: none!important;
+    color: $text-color;
 }
-li {
+
+li, ul {
     list-style-type: none;
+    margin-bottom: 0!important;
+    float: left;
+}
+
+button, input {
+    outline: none;
 }

@@ -6,6 +6,9 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HeaderComponent } from './components/main-layout/header/header.component';
 import { FooterComponent } from './components/main-layout/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientService } from './services/http-client.service';
+import { SlidesModule } from './components/slides/slides.module';
 
 @NgModule({
   declarations: [
@@ -17,9 +20,11 @@ import { FooterComponent } from './components/main-layout/footer/footer.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    SlidesModule
   ],
-  providers: [],
+  providers: [HttpClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
