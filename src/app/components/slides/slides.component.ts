@@ -3,7 +3,6 @@ import { API_CONFIG, MOVIE_TYPE } from 'src/app/constants/api.constant';
 import { IAPIResponse } from 'src/app/models/api.model';
 import { MoviesService } from 'src/app/services/movies.service';
 import { SwiperOptions, Swiper } from 'swiper';
-import 'boxicons';
 
 @Component({
   selector: 'app-slides',
