@@ -1,5 +1,5 @@
 {
-  "name": "hunting-sales",
+  "name": "smovies",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -21,7 +21,6 @@
     "@angular/router": "~7.1.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "bootstrap": "^4.5.0",
-    "boxicons": "^2.0.9",
     "core-js": "^2.5.4",
     "jquery": "^3.5.1",
     "ngx-useful-swiper": "^10.0.1",

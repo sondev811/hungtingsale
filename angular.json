@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "hunting-sales": {
+    "smovies": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/hunting-sales",
+            "outputPath": "dist/smovies",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "hunting-sales:build"
+            "browserTarget": "smovies:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "hunting-sales:build:production"
+              "browserTarget": "smovies:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hunting-sales:build"
+            "browserTarget": "smovies:build"
           }
         },
         "test": {
@@ -111,7 +111,7 @@
         }
       }
     },
-    "hunting-sales-e2e": {
+    "smovies-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -120,11 +120,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "hunting-sales:serve"
+            "devServerTarget": "smovies:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "hunting-sales:serve:production"
+              "devServerTarget": "smovies:serve:production"
             }
           }
         },
@@ -140,5 +140,5 @@
       }
     }
   },
-  "defaultProject": "hunting-sales"
+  "defaultProject": "smovies"
 }
