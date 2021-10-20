@@ -27,3 +27,9 @@ export const TV_TYPE = {
     AIRING_TODAY: 'airing_today'
 };
 
+export const MOVIE_TYPE_TEXT = {
+    popular: 'Trending',
+    top_rated: 'Top Rate',
+    upcoming: 'Upcoming'
+};
+

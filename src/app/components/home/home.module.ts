@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SlidesModule } from '../slides/slides.module';
+import { MovieListModule } from '../movie-list/movie-list.module';
+import { MoviesService } from 'src/app/services/movies.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }
@@ -13,7 +15,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SlidesModule
-  ]
+    SlidesModule,
+    MovieListModule
+  ],
+  providers: [MoviesService]
 })
 export class HomeModule { }

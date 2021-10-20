@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { CATEGORY } from '../constants/api.constant';
 import { HttpClientService } from './http-client.service';
 
@@ -7,7 +7,7 @@ import { HttpClientService } from './http-client.service';
   providedIn: 'root'
 })
 export class MoviesService {
-
+  movieTrendingList = new EventEmitter<Array<Object>>();
   constructor(private http: HttpClientService) {}
 
   getMovieListByType(type: String) {

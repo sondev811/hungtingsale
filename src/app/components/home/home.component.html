@@ -1,1 +1,4 @@
 <app-slides></app-slides>
+<!-- Trending -->
+{{movieTrendingList}}
+<app-movie-list *ngIf="movieTrendingList && movieTrendingList.length" [movieType]="movieType.POPULAR" [movieList]="movieTrendingList"></app-movie-list>
