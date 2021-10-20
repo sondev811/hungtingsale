@@ -28,7 +28,7 @@ export const TV_TYPE = {
 };
 
 export const MOVIE_TYPE_TEXT = {
-    popular: 'Trending',
+    popular: 'Trending Movies',
     top_rated: 'Top Rate',
     upcoming: 'Upcoming'
 };

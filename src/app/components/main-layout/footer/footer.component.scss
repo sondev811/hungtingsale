@@ -1,0 +1,61 @@
+@import '../../../../scss/mixin.scss';
+@import '../../../../scss/variable.scss';
+.footer-container {
+    margin-top: 2rem;
+    background-image: url('../../../../assets/images/footer.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    &::before {
+        width: 100%;
+        height: 100%;
+        content: '';
+        background-color: rgba($color: #000000, $alpha: .5);
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+    &__logo {
+        z-index: 100;
+        position: relative;
+        @include flex(center, center);
+        padding: 1.875rem 0;
+        a {
+            color: #3D9970;
+            font-weight: 600;
+            font-size: 2.2rem;
+            text-decoration: none;
+        }
+    }
+    &__content {
+        z-index: 100;
+        position: relative;
+        padding-bottom: 4rem;
+        @include flex(center, center);
+        &__list {
+            display: grid!important;
+            grid-template-columns: repeat(3, 1fr);
+            @include mobile {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            &>div {
+                padding: 1rem 2rem;
+                @include flex(flex-start, flex-start);
+                flex-direction: column;
+                a, p {
+                    margin-top: 1rem;
+                    color: #fff;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                }
+                a {
+                    transition: .3s all ease;
+                    &:hover {
+                        color: $main-color;
+                    }
+                }
+            }
+        }
+    }
+}

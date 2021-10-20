@@ -47,6 +47,7 @@ export class SlidesComponent implements OnInit {
           this.movies.map(item => {
             this.movieService.getMovieVideos(item.id).subscribe({
               next: (dataTrailer: IAPIResponse) => {
+                console.log(dataTrailer);
                 if (dataTrailer && dataTrailer.results && dataTrailer.results.length) {
                     item['trailer'] = this.appConfig.TRAILER_VIDEO(dataTrailer.results[0].key);
                 }

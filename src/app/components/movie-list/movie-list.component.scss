@@ -1,0 +1,103 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+.movie-list-container {
+    padding: 0 9.375rem;
+    padding-top: 5rem;
+    @include tablet {
+        padding: 2rem 3.375rem;
+    }
+    @include mobile {
+        padding: 2rem 3rem
+    }
+    &__title {
+        margin-bottom: 2rem;
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+        @include flex(center, space-between);
+        @include tablet {
+            h2 {
+                font-size: 2rem;
+            }
+        }
+        @include mobile {
+            h2 {
+                font-size: 1.4rem;
+            }
+        }
+        button {
+            width: 9rem;
+            height: 2.5rem;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: 600;
+            margin-right: 1.2rem;
+            border: 2px #fff solid;
+            background-color: transparent;
+            transition: .3s all;
+            &:hover {
+                background-color: #fff;
+                color: $main-color!important;
+            }
+        }
+    }
+    .name {
+        padding: 1rem 0;
+        h3 {
+            font-size: 1.1rem;  
+            transition: .3s all ease;
+            cursor: pointer;
+            font-weight: 600;
+        } 
+    }
+    
+
+    .swiper-slide {
+        &:hover .play-button {
+            opacity: 1;
+        }
+        &:hover .play-button button {
+            transform: scale(1);
+        }
+        &:hover .name h3 {
+            color: $main-color;
+        }
+    }
+
+    .slide-content {
+        cursor: pointer;
+        position: relative;
+        img {
+            border-radius: 15px;
+        }
+        .play-button {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            @include flex(center, center);
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            background-color: rgba($color: #000000, $alpha: .7);
+            button {
+                font-size: 17px;
+                border: 2px $main-color solid;
+                background-color: $main-color;
+                box-shadow: 0px 0 20px $main-color;
+                width: 5rem;
+                height: 3rem;
+                border-radius: 25px;
+                color: #fff;
+                font-weight: 600;
+                transition: .3s ease all;
+                transform: scale(0);
+            }
+            transition: .3s ease all;
+        }
+        
+
+    }
+}

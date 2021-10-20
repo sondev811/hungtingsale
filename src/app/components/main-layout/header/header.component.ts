@@ -26,9 +26,7 @@ export class HeaderComponent implements OnInit {
       window.addEventListener('scroll', () => {
         if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
           header.classList.add('shrink');
-          console.log('scroll down');
         } else {
-          console.log('scroll up');
           header.classList.remove('shrink');
         }
       });

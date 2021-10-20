@@ -1,3 +1,23 @@
-<p>
-  movie-list works!
-</p>
+<div class="movie-list-container">
+  <div class="movie-list-container__title">
+    <h2>{{movieTypeText}}</h2>
+    <button class="slide-content__infor__button--trailer">See more</button>
+  </div>
+  <div class="movie-list-container__content">
+    <swiper *ngIf="config && movieList && movieList.length" [config]="config">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"  *ngFor="let movie of movieList" >
+            <div class="slide-content">
+                <img src={{appConfig.W500IMAGE(movie.poster_path)}} alt="movie.poster_path">
+                <div class="play-button">
+                  <button><i class='bx bx-play'></i></button>
+                </div>
+            </div>
+            <div class="name">
+              <h3> {{ movie.title }}</h3>
+            </div>
+        </div>
+      </div>
+    </swiper>
+  </div>
+</div>

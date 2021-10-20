@@ -1,6 +1,26 @@
 @import '../../../scss/mixin.scss';
+@import '../../../scss/variable.scss';
+.swiper-config {
+    height: 100vh;
+    @include tablet {
+        height: 66vh!important;
+    }
+    @include mobile {
+        height: 60vh!important;
+    }
+}
 .slide-container {
-    padding: 9rem 9.375rem;
+    height: 100%;
+    @include tablet {
+        height: 100%;
+        padding: 0rem 6.375rem;
+    }
+    @include mobile {
+        height: 100%;
+        padding: 0rem 2rem;
+    }
+    @include flex(center, center);
+    padding: 0 9.375rem;;
     width: 100%;
     position: relative;
     background-position: center;
@@ -22,7 +42,7 @@
         height: 100%;
         bottom: 0;
         left: 0;
-        background-image: linear-gradient(to top, #0f0f0f, rgba($color: #000000, $alpha: 0));
+        background-image: linear-gradient(to top, #0f0f0f, rgba($color: #000000, $alpha: .5));
     }
     .slide-content {
         @include flex(center, unset);
@@ -32,7 +52,7 @@
             position: relative;
             z-index: 100;
             @include tablet {
-                width: 100%;
+                width: 100%!important;
             };
             button {
                 width: 9rem;
@@ -45,9 +65,9 @@
             &__button {
                 padding-top: .5rem;
                 &--watchnow {
-                    border: 2px #ff0000 solid;
-                    background-color: #ff0000;
-                    box-shadow: 0px 0 20px #ff0000;
+                    border: 2px $main-color solid;
+                    background-color: $main-color;
+                    box-shadow: 0px 0 20px $main-color;
                 }
                 &--trailer {
                     border: 2px #fff solid;
@@ -55,7 +75,7 @@
                     transition: .3s all;
                     &:hover {
                         background-color: #fff;
-                        color: #ff0000!important;
+                        color: $main-color!important;
                     }
                 }
             }
@@ -64,7 +84,19 @@
                 font-weight: 700;
                 line-height: 1;
                 @include tablet {
-                    font-style: 4rem;
+                    font-size: 4rem;
+                }
+                @include mobile {
+                    font-size: 3rem;
+                }
+            }
+            .disabled {
+                opacity: .5;
+                cursor: not-allowed;
+                pointer-events: all !important;
+                &:hover {
+                    background-color: transparent;
+                    color: #fff!important;
                 }
             }
             &__overview {

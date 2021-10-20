@@ -7,6 +7,8 @@
     top: 0;
     left: 0;
     transition: .3s all;
+    @include mobile {
+    }
     .header-wrap {
         @include flex(center, space-between);
         padding: 0 2rem;
@@ -63,6 +65,7 @@
             left: 0;
             width: 100%;
             height: 5rem;
+            background: rgba($color: #000000, $alpha: .6);
             @include flex(center, center);
             li {
                 margin: 0 2rem;
