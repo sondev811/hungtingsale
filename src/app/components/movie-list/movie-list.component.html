@@ -1,7 +1,7 @@
 <div class="movie-list-container">
   <div class="movie-list-container__title">
     <h2>{{movieTypeText}}</h2>
-    <button class="slide-content__infor__button--trailer">See more</button>
+    <button class="slide-content__infor__button--trailer" (click)=seeMore()>See more</button>
   </div>
   <div class="movie-list-container__content">
     <swiper *ngIf="config && movieList && movieList.length" [config]="config">

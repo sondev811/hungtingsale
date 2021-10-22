@@ -9,6 +9,7 @@ import { FooterComponent } from './components/main-layout/footer/footer.componen
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientService } from './services/http-client.service';
 import { SlidesModule } from './components/slides/slides.module';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 @NgModule({
   declarations: [

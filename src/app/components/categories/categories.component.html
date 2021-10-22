@@ -1,0 +1,29 @@
+<section>
+    <div class="header">
+        <h2>{{menuType}}</h2>
+    </div>
+    <div class="search-movie-container">
+        <div class="search-movie-wrap">
+            <div [ngClass]="{'active' : isActiveClearSearch}">
+                <i class='bx bxs-x-circle' (click)="clearSearch()"></i>
+            </div>
+            <input type="text" placeholder="Enter keyword" [(ngModel)]="keyword" (ngModelChange)="keywordChange($event)" (keyup.enter)="onSearchMovie()">
+        </div>
+    </div>
+    <div class="movie-list-container">
+        <div class="movie-list-container__item" *ngFor="let movie of categoriesList">
+            <div class="movie-list-container__item--image">
+                <img [src]="getImageMovie(movie.poster_path, movie.backdrop_path)" alt="movie.poster_path">
+                <div class="play-button">
+                  <button><i class='bx bx-play'></i></button>
+                </div>
+            </div>
+            <div class="name">
+              <h3> {{ movie.title || movie.name}}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="load-more" *ngIf="totalPage !== this.moviesService.page">
+        <button (click)="loadMoreMovies()">Load more</button>
+    </div>
+</section>

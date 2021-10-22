@@ -1,61 +1,58 @@
-import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CATEGORY } from '../constants/api.constant';
 import { HttpClientService } from './http-client.service';
+import { CATEGORIES } from '../constants/base.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
-  movieTrendingList = new EventEmitter<Array<Object>>();
+  // movieTrendingList = new EventEmitter<Array<Object>>();
   constructor(private http: HttpClientService) {}
-
-  getMovieListByType(type: String) {
-    return this.http.get(CATEGORY.MOVIE + type);
+  page = 1;
+  keyword: string;
+  searched = false;
+  getListByType(category: string, typeMovie: String, page: Number = 1) {
+    const url = `${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${typeMovie}`;
+    return this.http.get(url, {page});
   }
 
-  getTVListByType(type: String) {
-    return this.http.get(CATEGORY.TV + type);
-  }
-
-  getMovieVideos(id: Number) {
-    return this.http.get(CATEGORY.MOVIE + id + CATEGORY.VIDEOS);
+  getVideos(id: Number, type: String) {
+    const url = `${type === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.VIDEOS}`
+    return this.http.get(url, {});
   }
 
   getTVVideos(id: Number) {
-    return this.http.get(CATEGORY.TV + id + CATEGORY.VIDEOS);
+    return this.http.get(CATEGORY.TV + id + CATEGORY.VIDEOS, {});
   }
 
-  movieSearch() {
-    return this.http.get(CATEGORY.SEARCH + CATEGORY.MOVIE);
-  }
-
-  tvSearch() {
-    return this.http.get(CATEGORY.SEARCH + CATEGORY.TV);
+  search(keyword, page, type) {
+    const url = `${CATEGORY.SEARCH}${type === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}`;
+    return this.http.get(url, {keyword, page});
   }
 
   getDetailMovie(id: Number) {
-    return this.http.get(CATEGORY.MOVIE + id);
+    return this.http.get(CATEGORY.MOVIE + id, {});
   }
 
   getDetailTV(id: Number) {
-    return this.http.get(CATEGORY.TV + id);
+    return this.http.get(CATEGORY.TV + id, {});
   }
 
   getCreditMovie(id: Number) {
-    return this.http.get(CATEGORY.MOVIE + id + CATEGORY.CREDITS);
+    return this.http.get(CATEGORY.MOVIE + id + CATEGORY.CREDITS, {});
   }
 
   getCreditTV(id: Number) {
-    return this.http.get(CATEGORY.TV + id + CATEGORY.CREDITS);
+    return this.http.get(CATEGORY.TV + id + CATEGORY.CREDITS, {});
   }
 
   getSimilarMovie(id: Number) {
-    return this.http.get(CATEGORY.MOVIE + id + CATEGORY.SIMILAR);
+    return this.http.get(CATEGORY.MOVIE + id + CATEGORY.SIMILAR, {});
   }
 
   getSimilarTV(id: Number) {
-    return this.http.get(CATEGORY.TV + id + CATEGORY.SIMILAR);
+    return this.http.get(CATEGORY.TV + id + CATEGORY.SIMILAR, {});
   }
 
 }

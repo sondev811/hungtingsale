@@ -9,14 +9,17 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class HttpClientService {
-
   constructor(
     private http: HttpClient,
     private router: Router) { }
 
-    getURL(url: string) {
+    getURL(url: string, params) {
       if (url) {
-        url = `${API_CONFIG.BASE_URL}${url}?api_key=${environment.API_KEY}&language=en-US`;
+        if(params && Object.keys(params).length) {
+          url = `${API_CONFIG.BASE_URL}${url}?api_key=${environment.API_KEY}&language=en-US&page=${params.page}&query=${params.keyword}`;
+        } else {
+          url = `${API_CONFIG.BASE_URL}${url}?api_key=${environment.API_KEY}&language=en-US`;
+        }
       }
       return url;
     }
@@ -27,8 +30,8 @@ export class HttpClientService {
     return headers;
   }
 
-  get(url?: string) {
-    url = this.getURL(url);
+  get(url: string, params: any) {
+    url = this.getURL(url, params);
     const headers = this.getHeader();
     return new Observable(subscriber => {
       this.http.get(url, { headers })

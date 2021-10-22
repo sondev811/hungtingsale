@@ -1,6 +1,9 @@
+import { TV_TYPE_TEXT } from './../../constants/api.constant';
+import { HomeService } from 'src/app/services/home.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { API_CONFIG, MOVIE_TYPE_TEXT } from 'src/app/constants/api.constant';
 import { SwiperOptions } from 'swiper';
+import { CATEGORIES } from 'src/app/constants/base.constants';
 
 @Component({
   selector: 'app-movie-list',
@@ -10,10 +13,11 @@ import { SwiperOptions } from 'swiper';
 export class MovieListComponent implements OnInit {
   @Input() movieType: string;
   @Input() movieList: Array<Object>;
+  @Input() category: string
   config: SwiperOptions;
   movieTypeText: String;
   appConfig = API_CONFIG;
-  constructor() { }
+  constructor(private homeService: HomeService) { }
 
   ngOnInit() {
     this.config = {
@@ -42,8 +46,12 @@ export class MovieListComponent implements OnInit {
       }
     };
     if (this.movieType) {
-      this.movieTypeText = MOVIE_TYPE_TEXT[this.movieType];
+      this.movieTypeText = this.category === CATEGORIES.MOVIES ? MOVIE_TYPE_TEXT[this.movieType] : TV_TYPE_TEXT[this.movieType];
     }
+  }
+
+  seeMore() {
+    this.homeService.activeMenu.next(this.category);
   }
 
 }

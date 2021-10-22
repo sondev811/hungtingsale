@@ -30,6 +30,9 @@ export const TV_TYPE = {
 export const MOVIE_TYPE_TEXT = {
     popular: 'Trending Movies',
     top_rated: 'Top Rate',
-    upcoming: 'Upcoming'
 };
+
+export const TV_TYPE_TEXT = {
+    popular: 'Trending TV Series',
+}
 

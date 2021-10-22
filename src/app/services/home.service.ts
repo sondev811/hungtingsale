@@ -5,5 +5,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class HomeService {
   // movieList = new EventEmitter<any>();
+  activeMenu = new EventEmitter<string>();
   constructor() { }
 }

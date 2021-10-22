@@ -1,6 +1,6 @@
+import { CATEGORIES } from './../../../constants/base.constants';
+import { HomeService } from './../../../services/home.service';
 import { Component, OnInit } from '@angular/core';
-import { MENU } from 'src/app/constants/base.constants';
-
 
 @Component({
   selector: 'app-header',
@@ -8,16 +8,23 @@ import { MENU } from 'src/app/constants/base.constants';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  menu = MENU;
-  activeMenu = MENU.HOME;
-  constructor() { }
+  menu = CATEGORIES;
+  activeMenu = CATEGORIES.HOME;
+  constructor(public homeService: HomeService) { }
 
   ngOnInit() {
+    // this.homeService.activeMenu.next(CATEGORIES.HOME);
     this.shrinkHeader();
+    this.jumpToTop();
+    this.homeService.activeMenu.subscribe({
+      next: (type) => {
+        this.activeMenu = type;
+      }
+    });
   }
 
   clickMenu(type: string) {
-    this.activeMenu = type;
+    this.homeService.activeMenu.next(type);
   }
 
   shrinkHeader() {
@@ -29,7 +36,32 @@ export class HeaderComponent implements OnInit {
         } else {
           header.classList.remove('shrink');
         }
+
       });
     }
+  }
+
+  jumpToTop() {
+    const btnToTop = document.getElementById('toTop');
+    if (btnToTop) {
+      window.addEventListener('scroll', () => {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+          btnToTop.classList.add('active');
+        } else {
+          btnToTop.classList.remove('active');
+        }
+      });
+
+    }
+    
+    
+  }
+
+  goToTop() {
+    window.scroll({
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'
+    });
   }
 }

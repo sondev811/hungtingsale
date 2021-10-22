@@ -1,3 +1,4 @@
+import { CATEGORIES } from './../../constants/base.constants';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { API_CONFIG, MOVIE_TYPE } from 'src/app/constants/api.constant';
 import { IAPIResponse } from 'src/app/models/api.model';
@@ -18,7 +19,6 @@ export class SlidesComponent implements OnInit {
   trailerVideo = API_CONFIG.TRAILER_VIDEO('video');
   constructor(private movieService: MoviesService) { }
   async ngOnInit() {
-    console.log('detect onInit');
     await this.getMovies();
     this.config = {
       loop: true,
@@ -39,15 +39,14 @@ export class SlidesComponent implements OnInit {
   }
 
   getMovies() {
-    this.movieService.getMovieListByType(MOVIE_TYPE.POPULAR).subscribe({
+    this.movieService.getListByType(CATEGORIES.MOVIES, MOVIE_TYPE.POPULAR).subscribe({
       next: (data: IAPIResponse) => {
         if (data && data.results && data.results.length) {
-          this.movieService.movieTrendingList.next(data.results);
+          // this.movieService.movieTrendingList.next(data.results);
           this.movies = data.results.slice(0, 4);
           this.movies.map(item => {
-            this.movieService.getMovieVideos(item.id).subscribe({
+            this.movieService.getVideos(item.id, CATEGORIES.MOVIES).subscribe({
               next: (dataTrailer: IAPIResponse) => {
-                console.log(dataTrailer);
                 if (dataTrailer && dataTrailer.results && dataTrailer.results.length) {
                     item['trailer'] = this.appConfig.TRAILER_VIDEO(dataTrailer.results[0].key);
                 }
@@ -94,10 +93,6 @@ export class SlidesComponent implements OnInit {
       this.stopVideo(allModal[i]);
     }
     this.isOpenTrailer = false;
-  }
-
-  onSlideChange() {
-    console.log('slide change');
   }
 
   stopVideo(modal: any) {
