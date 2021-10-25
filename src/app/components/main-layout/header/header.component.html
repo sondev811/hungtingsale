@@ -5,14 +5,14 @@
     </div>
     <nav class="menu-container">
       <ul>
-        <li [ngClass]="{active: activeMenu === menu.HOME}" (click)="clickMenu(menu.HOME)">
-          <a>{{menu.HOME}}</a>
+        <li routerLinkActive="active">
+          <a routerLink="/home">{{menu.HOME}}</a>
         </li>
-        <li [ngClass]="{active: activeMenu === menu.MOVIES}" (click)="clickMenu(menu.MOVIES)">
-          <a>{{menu.MOVIES}}</a>
+        <li routerLinkActive="active">
+          <a routerLink="/movies">{{menu.MOVIES}}</a>
         </li>
-        <li [ngClass]="{active: activeMenu === menu.TV_SERIES}" (click)="clickMenu(menu.TV_SERIES)">
-          <a>{{menu.TV_SERIES}}</a>
+        <li routerLinkActive="active">
+          <a routerLink="/tv-series">{{menu.TV_SERIES}}</a>
         </li>
       </ul>
     </nav>

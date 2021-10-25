@@ -1,18 +1,11 @@
 
 <div class="app-loading lds-dual-ring">
 </div>
-<app-slides *ngIf="activeMenu === categories.HOME"></app-slides>
+<app-slides></app-slides>
 <!-- Category -->
- <app-categories *ngIf="activeMenu !== categories.HOME" 
-    [menuType]="activeMenu" 
-    [categoriesList]="categoriesList" 
-    (onLoadMore)="loadMoreMovies($event)"
-    (onSearch)="onSearch()"
-    [totalPage]="totalPage">
-</app-categories>
 <!-- Movie Trending -->
-<app-movie-list *ngIf="activeMenu === categories.HOME && movieTrendingList && movieTrendingList.length" [category]="categories.MOVIES" [movieType]="movieType.POPULAR" [movieList]="movieTrendingList"></app-movie-list>
+<app-movie-list *ngIf="movieTrendingList && movieTrendingList.length" [category]="categories.MOVIES" [movieType]="movieType.POPULAR" [movieList]="movieTrendingList"></app-movie-list>
 <!-- Movie Top rate -->
-<app-movie-list *ngIf="activeMenu === categories.HOME && movieTopRateList && movieTopRateList.length" [category]="categories.MOVIES" [movieType]="movieType.TOP_RATE" [movieList]="movieTopRateList"></app-movie-list>
+<app-movie-list *ngIf="movieTopRateList && movieTopRateList.length" [category]="categories.MOVIES" [movieType]="movieType.TOP_RATE" [movieList]="movieTopRateList"></app-movie-list>
 <!-- TV Trending -->
-<app-movie-list *ngIf="activeMenu === categories.HOME && tvTrendingList && tvTrendingList.length" [category]="categories.TV_SERIES" [movieType]="tvType.POPULAR" [movieList]="tvTrendingList"></app-movie-list>
+<app-movie-list *ngIf="tvTrendingList && tvTrendingList.length" [category]="categories.TV_SERIES" [movieType]="tvType.POPULAR" [movieList]="tvTrendingList"></app-movie-list>

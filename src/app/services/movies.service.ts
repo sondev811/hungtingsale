@@ -9,9 +9,7 @@ import { CATEGORIES } from '../constants/base.constants';
 export class MoviesService {
   // movieTrendingList = new EventEmitter<Array<Object>>();
   constructor(private http: HttpClientService) {}
-  page = 1;
-  keyword: string;
-  searched = false;
+  
   getListByType(category: string, typeMovie: String, page: Number = 1) {
     const url = `${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${typeMovie}`;
     return this.http.get(url, {page});

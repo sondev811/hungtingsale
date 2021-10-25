@@ -51,7 +51,6 @@ export class MovieListComponent implements OnInit {
   }
 
   seeMore() {
-    this.homeService.activeMenu.next(this.category);
   }
 
 }

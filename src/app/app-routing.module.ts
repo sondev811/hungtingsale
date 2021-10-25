@@ -17,6 +17,14 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: './components/home/home.module#HomeModule'
+      }, 
+      {
+        path: 'movies',
+        loadChildren: './components/categories/categories.module#CategoriesModule'
+      }, 
+      {
+        path: 'tv-series',
+        loadChildren: './components/categories/categories.module#CategoriesModule'
       }
     ]
   },

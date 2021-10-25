@@ -15,20 +15,11 @@ export class HomeComponent implements OnInit {
   tvType = TV_TYPE;
   movieTrendingList: Array<Object>;
   movieTopRateList: Array<Object>;
-  movieUpcomingList: Array<Object>;
   tvTrendingList: Array<Object>;
   categories = CATEGORIES;
-  activeMenu = CATEGORIES.HOME;
-  categoriesList = [];
-  page = 1;
-  totalPageTV: number;
-  totalPageMovie: number;
-  totalPage: number;
   constructor(private moviesService: MoviesService, public homeService: HomeService ) { }
 
   ngOnInit() {
-    // Handle load movie when click menu
-    this.handleCategories();
     // Load movies
     this.getListByType();
 
@@ -39,25 +30,6 @@ export class HomeComponent implements OnInit {
     //     }
     //   }
     // });
-  }
-
-  handleCategories() {
-    this.homeService.activeMenu.subscribe((type) => {
-      this.activeMenu = type;
-      this.categoriesList = [];
-      this.moviesService.page = 1;
-      // this.loading();
-      if (this.activeMenu === this.categories.HOME) {
-        return;
-      }
-      if (this.activeMenu === this.categories.MOVIES) {
-        this.categoriesList = this.movieUpcomingList;
-        this.totalPage = this.totalPageMovie;
-        return;
-      } 
-      this.categoriesList = this.tvTrendingList;
-      this.totalPage = this.totalPageTV;
-    });
   }
 
   loading() {
@@ -85,61 +57,13 @@ export class HomeComponent implements OnInit {
         this.movieTopRateList = data.results;
       }
     });
-    // Get list movies upcoming
-    this.moviesService.getListByType(CATEGORIES.MOVIES, this.movieType.UP_COMING).subscribe({
-      next: (data: any) => {
-        if (!data || !data.results || !data.total_pages) {
-          return;
-        }
-        this.movieUpcomingList = data.results;
-        this.totalPageMovie = data.total_pages;
-      }
-    });
     // Get list TV series trending
     this.moviesService.getListByType(CATEGORIES.TV_SERIES, this.tvType.POPULAR).subscribe({
       next: (data: any) => {
         if (!data || !data.results || !data.total_pages) {
           return;
         }
-        this.totalPageTV = data.total_pages;
         this.tvTrendingList = data.results;
-      }
-    });
-  }
-
-  loadMoreMovies(event: string) {
-    this.moviesService.page += 1;
-    if (this.moviesService.keyword) {
-      this.moviesService.search(this.moviesService.keyword, this.moviesService.page, this.activeMenu).subscribe({
-          next: (data: any) => {
-            if (!data || !data.results) {
-              return;
-            }
-            this.categoriesList.push(...data.results);
-          }
-      });
-      return;
-    }
-    this.moviesService.getListByType(event, this.movieType.UP_COMING, this.moviesService.page).subscribe({
-      next: (data: any) => {
-        if (!data || !data.results) {
-          return;
-        }
-        this.categoriesList.push(...data.results);
-      }
-    });
-  }
-
-  onSearch() {
-    this.moviesService.page = 1;
-    this.moviesService.searched = !this.moviesService.searched;
-    this.moviesService.search(this.moviesService.keyword, this.moviesService.page, this.activeMenu).subscribe({
-      next: (data: any) => {
-        if (!data || !data.results) {
-          return;
-        }
-        this.categoriesList = data.results;
-        this.totalPage = data.total_pages;
       }
     });
   }

@@ -1,3 +1,4 @@
+import { CategoriesModule } from './components/categories/categories.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -8,8 +9,6 @@ import { HeaderComponent } from './components/main-layout/header/header.componen
 import { FooterComponent } from './components/main-layout/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientService } from './services/http-client.service';
-import { SlidesModule } from './components/slides/slides.module';
-import { CategoriesComponent } from './components/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CategoriesModule
   ],
   providers: [HttpClientService],
   bootstrap: [AppComponent]

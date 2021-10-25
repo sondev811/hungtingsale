@@ -7,12 +7,12 @@
             <div [ngClass]="{'active' : isActiveClearSearch}">
                 <i class='bx bxs-x-circle' (click)="clearSearch()"></i>
             </div>
-            <input type="text" placeholder="Enter keyword" [(ngModel)]="keyword" (ngModelChange)="keywordChange($event)" (keyup.enter)="onSearchMovie()">
+            <input type="text" placeholder="Enter keyword" [(ngModel)]="keyword" (ngModelChange)="keywordChange($event)" (keyup.enter)="onSearch()">
         </div>
     </div>
     <div class="movie-list-container">
-        <div class="movie-list-container__item" *ngFor="let movie of categoriesList">
-            <div class="movie-list-container__item--image">
+        <div class="movie-list-container__item" *ngFor="let movie of movieList">
+            <div [routerLink]="['/movie/detail', movie.id]" routerLinkActive="router-link-active"  class="movie-list-container__item--image">
                 <img [src]="getImageMovie(movie.poster_path, movie.backdrop_path)" alt="movie.poster_path">
                 <div class="play-button">
                   <button><i class='bx bx-play'></i></button>
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="load-more" *ngIf="totalPage !== this.moviesService.page">
+    <div class="load-more" *ngIf="totalPage !== page">
         <button (click)="loadMoreMovies()">Load more</button>
     </div>
 </section>

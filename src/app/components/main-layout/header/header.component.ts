@@ -9,22 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   menu = CATEGORIES;
-  activeMenu = CATEGORIES.HOME;
   constructor(public homeService: HomeService) { }
 
   ngOnInit() {
-    // this.homeService.activeMenu.next(CATEGORIES.HOME);
     this.shrinkHeader();
     this.jumpToTop();
-    this.homeService.activeMenu.subscribe({
-      next: (type) => {
-        this.activeMenu = type;
-      }
-    });
   }
 
   clickMenu(type: string) {
-    this.homeService.activeMenu.next(type);
   }
 
   shrinkHeader() {
