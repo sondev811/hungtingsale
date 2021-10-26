@@ -1,0 +1,23 @@
+<section>
+  <div class="header">
+    <h2>Genres</h2>
+  </div>
+  <div class="genres">
+    <div class="genres__movies">
+      <h3>Movies</h3>
+      <div>
+        <div class="genres__movies__item" *ngFor="let item of movieGenres">
+          <span [routerLink]="['/movies/genre', item.name]">{{item.name}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="genres__tv">
+      <h3>TV-Series</h3>
+      <div>
+        <div class="genres__tv__item" *ngFor="let item of tvGenres">
+          <span [routerLink]="['/tv-series/genre', item.name]">{{item.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

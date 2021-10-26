@@ -1,0 +1,63 @@
+@import '../../../scss/mixin.scss';
+@import '../../../scss/variable.scss';
+.header {
+    background-image: url('../../../assets/images/footer.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 12.5rem;
+    @include flex(center, center);
+    &::before {
+        width: 100%;
+        height: 100%;
+        content: '';
+        background-image: linear-gradient(to top, #0f0f0f, rgba($color: #000000, $alpha: .5));
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+    h2 {
+        position: relative;
+        z-index: 10;
+        padding-top: 5rem;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+}
+
+.genres {
+    padding: $padding-body;
+    @include tablet {
+        padding: 3rem 9.375rem;
+    }
+    @include mobile {
+        padding: 3rem 3.375rem;
+    }
+    &__movies, &__tv {
+        margin-bottom: 2rem;
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        &__item {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 1rem;
+            span {
+                cursor: pointer;
+                padding: .5rem 1.5rem;
+                border: 3px solid #fff;
+                border-radius: 20px;
+                font-size: .8rem;
+                font-weight: 600;
+                background-color: $background-body;
+                transition: .3s all ease;
+                &:hover {
+                    background-color: #fff;
+                    color: $main-color;
+                }
+            }
+        }
+    }
+}
