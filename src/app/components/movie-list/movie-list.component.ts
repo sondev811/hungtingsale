@@ -1,4 +1,4 @@
-import { TV_TYPE_TEXT } from './../../constants/api.constant';
+import { TV_TYPE, TV_TYPE_TEXT } from './../../constants/api.constant';
 import { HomeService } from 'src/app/services/home.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { API_CONFIG, MOVIE_TYPE_TEXT } from 'src/app/constants/api.constant';
@@ -17,6 +17,8 @@ export class MovieListComponent implements OnInit {
   config: SwiperOptions;
   movieTypeText: String;
   appConfig = API_CONFIG;
+  tvText = TV_TYPE_TEXT;
+  tvType = TV_TYPE;
   constructor(private homeService: HomeService) { }
 
   ngOnInit() {

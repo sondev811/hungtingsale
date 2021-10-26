@@ -1,3 +1,30 @@
-<p>
-  movie-detail works!
-</p>
+<section *ngIf="movieData">
+  <div class="header" [ngStyle]="{'background-image': 'url(' + movieData.backdrop_path + ')'}">
+  </div>
+  <div class="movie-content">
+    <div class="movie-content__poster">
+      <div class="movie-content__poster__background" [ngStyle]="{'background-image': 'url(' + movieData.poster_path + ')'}">
+      </div>
+    </div>
+    <div class="movie-content__information">
+      <div class="movie-content__information__title">
+        {{ movieData.title || movieData.name}}
+      </div>
+      <div class="movie-content__information__genres">
+        <span *ngFor="let item of movieData.genres">{{item.name}}</span>
+      </div>
+      <div class="movie-content__information__overview">
+        {{ movieData.overview }}
+      </div>
+      <div class="movie-content__information__cast">
+        <h5>Casts</h5>
+        <div class="movie-content__information__cast__infor">
+          <div class="" *ngFor="let credit of credits">
+            <img src="{{appConfig.W500IMAGE(credit.profile_path)}}" alt="">
+            <p>{{ credit.name || name.original_name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

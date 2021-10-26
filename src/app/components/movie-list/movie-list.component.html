@@ -1,7 +1,7 @@
 <div class="movie-list-container">
   <div class="movie-list-container__title">
     <h2>{{movieTypeText}}</h2>
-    <button class="slide-content__infor__button--trailer" (click)=seeMore()>See more</button>
+    <button [routerLink]="this.movieTypeText === tvText[tvType.POPULAR] ? ['/tv-series'] : ['/movies']" routerLinkActive="router-link-active"  class="slide-content__infor__button--trailer" (click)=seeMore()>See more</button>
   </div>
   <div class="movie-list-container__content">
     <swiper *ngIf="config && movieList && movieList.length" [config]="config">
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="name">
-              <h3> {{ movie.title }}</h3>
+              <h3> {{ movie.title || movie.name }}</h3>
             </div>
         </div>
       </div>

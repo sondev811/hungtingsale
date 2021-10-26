@@ -15,8 +15,8 @@ export class MoviesService {
     return this.http.get(url, {page});
   }
 
-  getVideos(id: Number, type: String) {
-    const url = `${type === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.VIDEOS}`
+  getVideos(id: Number, category: String) {
+    const url = `${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.VIDEOS}`
     return this.http.get(url, {});
   }
 
@@ -24,25 +24,17 @@ export class MoviesService {
     return this.http.get(CATEGORY.TV + id + CATEGORY.VIDEOS, {});
   }
 
-  search(keyword, page, type) {
-    const url = `${CATEGORY.SEARCH}${type === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}`;
+  search(keyword: String, page: number, category: String) {
+    const url = `${CATEGORY.SEARCH}${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}`;
     return this.http.get(url, {keyword, page});
   }
 
-  getDetailMovie(id: Number) {
-    return this.http.get(CATEGORY.MOVIE + id, {});
+  getDetail(category: String, id: Number) {
+    return this.http.get(`${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}`, {});
   }
 
-  getDetailTV(id: Number) {
-    return this.http.get(CATEGORY.TV + id, {});
-  }
-
-  getCreditMovie(id: Number) {
-    return this.http.get(CATEGORY.MOVIE + id + CATEGORY.CREDITS, {});
-  }
-
-  getCreditTV(id: Number) {
-    return this.http.get(CATEGORY.TV + id + CATEGORY.CREDITS, {});
+  getCredit(category: String, id: Number) {
+    return this.http.get(`${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.CREDITS}`, {});
   }
 
   getSimilarMovie(id: Number) {

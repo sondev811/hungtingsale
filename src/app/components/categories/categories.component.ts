@@ -15,6 +15,7 @@ export class CategoriesComponent implements OnInit {
   menuType: string;
   keyword: string;
   appConfig = API_CONFIG;
+  categories = CATEGORIES;
   isActiveClearSearch: boolean;
   movieList = [];
   totalPage = 0;

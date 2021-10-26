@@ -22,11 +22,11 @@ export class SlidesComponent implements OnInit {
     await this.getMovies();
     this.config = {
       loop: true,
-      autoplay: {
-        delay: 7000,
-        pauseOnMouseEnter: true,
-        disableOnInteraction: false
-      },
+      // autoplay: {
+      //   delay: 7000,
+      //   pauseOnMouseEnter: true,
+      //   disableOnInteraction: false
+      // },
       grabCursor: true,
       spaceBetween: 0,
       speed: 1000,

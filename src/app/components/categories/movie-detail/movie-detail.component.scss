@@ -1,0 +1,92 @@
+@import '../../../../scss/mixin.scss';
+@import '../../../../scss/variable.scss';
+.header {
+    height: 50vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    @include flex(center, center);
+    &::before {
+        width: 100%;
+        height: 100%;
+        content: '';
+        background-image: linear-gradient(to top, #0f0f0f, rgba($color: #000000, $alpha: .5));
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+    h2 {
+        position: relative;
+        z-index: 10;
+        padding-top: 5rem;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+}
+.movie-content {
+   padding: 0 6.375rem;
+   @include flex(flex-start, flex-start);
+   margin-top: -8.5rem;
+   max-width: 1260px;
+   margin-left: auto;
+   margin-right: auto;
+   position: relative;
+   &__poster {
+       flex: 1;
+       height: 32rem;
+       &__background {
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: 1.875rem;
+       }
+   }
+   &__information {
+       width: 70%;
+       padding-left: 2rem;
+       position: relative;
+       &>div {
+           margin-bottom: 2rem;
+       }
+       &__title {
+           font-size: 3.6rem;
+           line-height: 1;
+       }
+       &__genres {
+           span:not(:first-child) {
+               margin-left: .5rem;
+           }
+           span {
+               padding: .5rem 1.5rem;
+               border: 3px solid #fff;
+               border-radius: 20px;
+               font-size: .8rem;
+               font-weight: 600;
+               background-color: $background-body;
+           }
+       }
+       &__cast {
+           h5 {
+               font-weight: 600;
+               margin-bottom: 1rem;
+           }
+           &__infor {
+               display: grid;
+               grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+               gap: 10px;
+               &>div {
+                   margin-right: .5rem;
+                   p {
+                       font-size: .8rem;
+                       margin-top: .2rem;
+                   }
+               }
+               img {
+                   width: 100px;
+               }
+           }
+       }
+   }
+}

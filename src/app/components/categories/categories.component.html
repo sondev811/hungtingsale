@@ -12,7 +12,7 @@
     </div>
     <div class="movie-list-container">
         <div class="movie-list-container__item" *ngFor="let movie of movieList">
-            <div [routerLink]="['/movie/detail', movie.id]" routerLinkActive="router-link-active"  class="movie-list-container__item--image">
+            <div [routerLink]="menuType === categories.MOVIES ? ['/movies/detail', movie.id] : ['/tv-series/detail', movie.id]" routerLinkActive="router-link-active"  class="movie-list-container__item--image">
                 <img [src]="getImageMovie(movie.poster_path, movie.backdrop_path)" alt="movie.poster_path">
                 <div class="play-button">
                   <button><i class='bx bx-play'></i></button>

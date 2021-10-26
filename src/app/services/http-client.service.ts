@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class HttpClientService {
+  loading = false;
   constructor(
     private http: HttpClient,
     private router: Router) { }
@@ -33,13 +34,18 @@ export class HttpClientService {
   get(url: string, params: any) {
     url = this.getURL(url, params);
     const headers = this.getHeader();
+    this.loading = true;
     return new Observable(subscriber => {
       this.http.get(url, { headers })
         .subscribe({
           next: (res: Object) => {
+            setTimeout(() => {
+              this.loading = false;
+            }, 100);
             subscriber.next(res);
           },
           error: (err) => {
+            this.loading = false;
             // this.handleError(err, subscriber, () => {
             //   this.get(url).subscribe(subscriber);
             // });

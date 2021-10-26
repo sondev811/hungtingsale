@@ -1,3 +1,4 @@
+import { HttpClientService } from './../../../services/http-client.service';
 import { CATEGORIES } from './../../../constants/base.constants';
 import { HomeService } from './../../../services/home.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   menu = CATEGORIES;
-  constructor(public homeService: HomeService) { }
+  constructor(public homeService: HomeService, public http: HttpClientService) { }
 
   ngOnInit() {
     this.shrinkHeader();
