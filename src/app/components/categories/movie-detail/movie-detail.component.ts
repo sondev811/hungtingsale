@@ -15,22 +15,23 @@ import { IAPIResponse } from 'src/app/models/api.model';
   styleUrls: ['./movie-detail.component.scss']
 })
 export class MovieDetailComponent implements OnInit {
-  private routeSub: Subscription;
   movieID: Number;
   menuType: String;
   movieData: IMovieDetail;
+  categories = CATEGORIES;
   credits: Array<IMovieCast>;
   movieVideos: any;
   appConfig = API_CONFIG;
   constructor(private route: ActivatedRoute, private router: Router, private moviesService: MoviesService) { }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       if (!this.router.url || !params || !params['id']) {
        return; 
       }
       this.movieID = params['id'];
       this.menuType = this.capitalizeFirstLetter(this.router.url.slice(1));
+      
       if (this.menuType.includes(CATEGORIES.MOVIES)) {
         this.menuType = CATEGORIES.MOVIES;
       } else {

@@ -4,7 +4,8 @@ import { Component, Input, OnChanges, OnInit, Output, EventEmitter } from '@angu
 import { API_CONFIG } from 'src/app/constants/api.constant';
 import { MoviesService } from 'src/app/services/movies.service';
 import { CATEGORIES } from 'src/app/constants/base.constants';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IAPIGenres, IGenre } from 'src/app/models/genres';
 
 @Component({
   selector: 'app-categories',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class CategoriesComponent implements OnInit {
   menuType: string;
+  menuTypeText: string;
   keyword: string;
   appConfig = API_CONFIG;
   categories = CATEGORIES;
@@ -25,15 +27,31 @@ export class CategoriesComponent implements OnInit {
   page = 1;
   movieUpcomingList = [];
   tvSeriesList = [];
-  constructor(public moviesService: MoviesService, private homeService: HomeService, private router: Router) {
+  genre: IGenre;
+  genres: Array<IGenre>;
+  genreNameRoute: string;
+  
+  constructor(public moviesService: MoviesService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    if(this.router.url) {
-      this.menuType = this.capitalizeFirstLetter(this.router.url.slice(1));
-    }
-    if (this.menuType !== CATEGORIES.MOVIES) {
+    this.menuType = this.capitalizeFirstLetter(this.router.url.slice(1));
+    if (this.menuType.includes(CATEGORIES.MOVIES)) {
+      this.menuType = CATEGORIES.MOVIES;
+    } else {
       this.menuType = CATEGORIES.TV_SERIES;
+    }
+    this.menuTypeText = this.menuType
+    this.route.params.subscribe(params => { 
+      if (!params || !params.name) {
+        return;
+      }
+      this.genreNameRoute = params['name'];
+      this.menuTypeText = this.genreNameRoute;
+    });
+    if (this.genreNameRoute) {
+      this.getGenres(this.menuType);
+      return;
     }
 
     if (this.menuType === CATEGORIES.MOVIES) {
@@ -61,6 +79,28 @@ export class CategoriesComponent implements OnInit {
         }
       });
     }
+    
+  }
+
+  getGenres(type: String) {
+    this.moviesService.getListGenres(type).subscribe({
+      next: (data: IAPIGenres) => {
+        this.genres = data.genres;
+        this.genre = this.genres.find((item) => {
+          return item.name === this.genreNameRoute;
+        });
+        this.moviesService.getListByGenre(this.menuType, this.genre.id, this.page).subscribe({
+          next: (data: any) => {
+            this.movieList = data.results;
+            this.totalPage = data.total_pages;
+          }
+        })
+      }
+    });
+  }
+
+  getListByGenre() {
+
   }
 
   capitalizeFirstLetter(str: string) {
@@ -85,16 +125,16 @@ export class CategoriesComponent implements OnInit {
     if (!this.searched) {
       return;
     }
-      this.searched = false;
-      this.movieList = [];
-      this.page = 1;
-      if (this.menuType === CATEGORIES.MOVIES) {
-        this.movieList = this.movieUpcomingList;
-        this.totalPage = this.totalMoviePage;
-        return;
-      } 
-      this.movieList = this.tvSeriesList;
-      this.totalPage = this.totalTVPage;
+    this.searched = false;
+    this.movieList = [];
+    this.page = 1;
+    if (this.menuType === CATEGORIES.MOVIES) {
+      this.movieList = this.movieUpcomingList;
+      this.totalPage = this.totalMoviePage;
+      return;
+    } 
+    this.movieList = this.tvSeriesList;
+    this.totalPage = this.totalTVPage;
   }
 
   onSearch() {
@@ -121,6 +161,17 @@ export class CategoriesComponent implements OnInit {
             }
             this.movieList.push(...data.results);
           }
+      });
+      return;
+    }
+    if (this.genreNameRoute) {
+      this.moviesService.getListByGenre(this.menuType, this.genre.id, this.page).subscribe({
+        next: (data: any) => {
+          if (!data || !data.results) {
+            return;
+          }
+          this.movieList.push(...data.results);
+        }
       });
       return;
     }

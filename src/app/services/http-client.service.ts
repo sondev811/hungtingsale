@@ -16,14 +16,24 @@ export class HttpClientService {
 
     getURL(url: string, params) {
       if (url) {
-        if(params && Object.keys(params).length) {
-          url = `${API_CONFIG.BASE_URL}${url}?api_key=${environment.API_KEY}&language=en-US&page=${params.page}&query=${params.keyword}`;
-        } else {
-          url = `${API_CONFIG.BASE_URL}${url}?api_key=${environment.API_KEY}&language=en-US`;
-        }
+        const urlWithParams = this.handleParams(params);
+        url = `${API_CONFIG.BASE_URL}${url}?api_key=${environment.API_KEY}&language=en-US${urlWithParams}`;
       }
       return url;
     }
+
+  handleParams(params) {
+    let urlWithParams = '';
+    const keys = Object.keys(params);
+    const values = Object.values(params);
+    if (!keys || !keys.length || !values || !values.length) {
+      return urlWithParams;
+    }
+    keys.forEach((item, index) => {
+      urlWithParams += `&${item}=${values[index]}`;
+    });
+    return urlWithParams;
+  }
 
   getHeader() {
     const headers = new HttpHeaders();

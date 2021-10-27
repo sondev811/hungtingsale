@@ -1,7 +1,8 @@
 export const CATEGORIES = {
     HOME: 'Home',
     MOVIES: 'Movies',
-    TV_SERIES: 'TV Series'
+    TV_SERIES: 'TV Series',
+    GENRES: 'Genres'
 };
 export const EMPTY_MOVIE = {
     list: [],

@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/main-layout/header/header.componen
 import { FooterComponent } from './components/main-layout/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientService } from './services/http-client.service';
+import { GenreModule } from './components/genre/genre.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientService } from './services/http-client.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CategoriesModule
+    CategoriesModule,
+    GenreModule
   ],
   providers: [HttpClientService],
   bootstrap: [AppComponent]

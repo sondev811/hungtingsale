@@ -7,6 +7,7 @@ import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 
 const routes: Routes = [
   { path: '', component: CategoriesComponent },
+  { path: 'genre/:name', component: CategoriesComponent },
   { path: 'detail/:id', component: MovieDetailComponent }
 ];
 

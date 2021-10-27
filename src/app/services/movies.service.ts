@@ -24,9 +24,19 @@ export class MoviesService {
     return this.http.get(CATEGORY.TV + id + CATEGORY.VIDEOS, {});
   }
 
-  search(keyword: String, page: number, category: String) {
+  getListByGenre(category: String , id: Number, page: Number) {
+    const url = `${CATEGORY.DISCOVER}${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}`
+    return this.http.get(url, {with_genres: id, page});
+  }
+
+  getListGenres(category: String) {
+    const url = `${CATEGORY.GENRE}${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${CATEGORY.LIST}`;
+    return this.http.get(url, {});
+  }
+
+  search(query: String, page: number, category: String) {
     const url = `${CATEGORY.SEARCH}${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}`;
-    return this.http.get(url, {keyword, page});
+    return this.http.get(url, {page, query});
   }
 
   getDetail(category: String, id: Number) {

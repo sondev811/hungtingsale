@@ -11,7 +11,10 @@ export const CATEGORY = {
     SEARCH: 'search/',
     VIDEOS: '/videos',
     CREDITS: '/credits',
-    SIMILAR: '/similar'
+    SIMILAR: '/similar',
+    GENRE: 'genre/',
+    DISCOVER: 'discover/',
+    LIST: '/list'
 };
 
 export const MOVIE_TYPE = {

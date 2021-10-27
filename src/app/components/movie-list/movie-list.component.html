@@ -6,15 +6,15 @@
   <div class="movie-list-container__content">
     <swiper *ngIf="config && movieList && movieList.length" [config]="config">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"  *ngFor="let movie of movieList" >
-            <div class="slide-content">
+        <div class="swiper-slide" *ngFor="let movie of movieList" >
+            <div class="slide-content" [routerLink]="this.movieTypeText === tvText[tvType.POPULAR] ? ['/tv-series/detail', movie.id] : ['/movies/detail', movie.id]">
                 <img src={{appConfig.W500IMAGE(movie.poster_path)}} alt="movie.poster_path">
                 <div class="play-button">
                   <button><i class='bx bx-play'></i></button>
                 </div>
             </div>
             <div class="name">
-              <h3> {{ movie.title || movie.name }}</h3>
+              <h3 [routerLink]="this.movieTypeText === tvText[tvType.POPULAR] ? ['/tv-series/detail', movie.id] : ['/movies/detail', movie.id]"> {{ movie.title || movie.name }}</h3>
             </div>
         </div>
       </div>

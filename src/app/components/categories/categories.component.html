@@ -1,9 +1,9 @@
 <section>
     <div class="header">
-        <h2>{{menuType}}</h2>
+        <h2>{{menuTypeText}}</h2>
     </div>
-    <div class="search-movie-container">
-        <div class="search-movie-wrap">
+    <div class="search-movie-container" >
+        <div class="search-movie-wrap" *ngIf="!genreNameRoute">
             <div [ngClass]="{'active' : isActiveClearSearch}">
                 <i class='bx bxs-x-circle' (click)="clearSearch()"></i>
             </div>

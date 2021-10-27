@@ -25,6 +25,10 @@ const routes: Routes = [
       {
         path: 'tv-series',
         loadChildren: './components/categories/categories.module#CategoriesModule'
+      },
+      {
+        path: 'genres',
+        loadChildren: './components/genre/genre.module#GenreModule'
       }
     ]
   },
