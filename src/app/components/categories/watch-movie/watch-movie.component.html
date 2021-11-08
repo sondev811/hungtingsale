@@ -1,0 +1,14 @@
+<div class="watch-movie">
+  <div class="watch-movie__player">
+    <iframe *ngIf="movieUrl" [src]="movieUrl | safe: 'resourceUrl'" frameborder="0" width="100%" height="100%"></iframe>
+  </div>
+  <div class="watch-movie__content" *ngIf="movieData">
+    <h3>{{ movieData.title || movieData.name }}</h3>
+    <div class="watch-movie__content--release">
+      Release date: {{ movieData.release_date }}
+    </div>
+    <div class="watch-movie__content--overview">
+      {{ movieData.overview }}
+    </div>
+  </div>
+</div>

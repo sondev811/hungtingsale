@@ -4,8 +4,14 @@
 <app-slides></app-slides>
 <!-- Category -->
 <!-- Movie Trending -->
-<app-movie-list *ngIf="movieTrendingList && movieTrendingList.length" [category]="categories.MOVIES" [movieType]="movieType.POPULAR" [movieList]="movieTrendingList"></app-movie-list>
+<div class="movie-list-container">
+    <app-movie-list *ngIf="movieTrendingList && movieTrendingList.length" [category]="categories.MOVIES" [movieType]="movieType.POPULAR" [movieList]="movieTrendingList"></app-movie-list>
+</div>
 <!-- Movie Top rate -->
-<app-movie-list *ngIf="movieTopRateList && movieTopRateList.length" [category]="categories.MOVIES" [movieType]="movieType.TOP_RATE" [movieList]="movieTopRateList"></app-movie-list>
+<div class="movie-list-container">
+    <app-movie-list *ngIf="movieTopRateList && movieTopRateList.length" [category]="categories.MOVIES" [movieType]="movieType.TOP_RATE" [movieList]="movieTopRateList"></app-movie-list>
+</div>
 <!-- TV Trending -->
-<app-movie-list *ngIf="tvTrendingList && tvTrendingList.length" [category]="categories.TV_SERIES" [movieType]="tvType.POPULAR" [movieList]="tvTrendingList"></app-movie-list>
+<div class="movie-list-container">
+    <app-movie-list *ngIf="tvTrendingList && tvTrendingList.length" [category]="categories.TV_SERIES" [movieType]="tvType.POPULAR" [movieList]="tvTrendingList" ></app-movie-list>
+</div>

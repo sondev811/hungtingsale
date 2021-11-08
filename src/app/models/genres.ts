@@ -3,6 +3,6 @@ export interface IAPIGenres {
 }
 
 export interface IGenre {
-    id: Number, 
+    id: Number,
     name: String
 }

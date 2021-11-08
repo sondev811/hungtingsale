@@ -51,7 +51,7 @@ export class HttpClientService {
           next: (res: Object) => {
             setTimeout(() => {
               this.loading = false;
-            }, 100);
+            }, 200);
             subscriber.next(res);
           },
           error: (err) => {

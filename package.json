@@ -23,11 +23,10 @@
     "bootstrap": "^4.5.0",
     "core-js": "^2.5.4",
     "jquery": "^3.5.1",
-    "ngx-useful-swiper": "^10.0.1",
+    "ngx-swiper-wrapper": "7.2.0",
     "node-sass": "^4.14.1",
     "rxjs": "~6.3.3",
     "safe-pipe": "^1.0.3",
-    "swiper": "^6.8.4",
     "tslib": "^2.3.1",
     "zone.js": "~0.8.26"
   },

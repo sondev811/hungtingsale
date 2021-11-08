@@ -18,11 +18,17 @@ export class GenreComponent implements OnInit {
    
     this.moviesService.getListGenres(CATEGORIES.MOVIES).subscribe({
       next: (data: IAPIGenres) => {
+        if (!data) {
+          return;
+        }
         this.movieGenres = data.genres;
       }
     });
     this.moviesService.getListGenres(CATEGORIES.TV_SERIES).subscribe({
       next: (data: IAPIGenres) => {
+        if (!data) {
+          return;
+        }
         this.tvGenres = data.genres;
       }
     });

@@ -1,5 +1,6 @@
+import { SwiperOptions } from 'swiper';
 import { MoviesService } from 'src/app/services/movies.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CATEGORIES } from 'src/app/constants/base.constants';
@@ -8,6 +9,7 @@ import { API_CONFIG } from 'src/app/constants/api.constant';
 import { IMovieCast, IMovieCredits } from 'src/app/models/movie-cast';
 import { IMovieVideo } from 'src/app/models/video';
 import { IAPIResponse } from 'src/app/models/api.model';
+import { IMovie, IMovieResponse } from 'src/app/models/movie';
 
 @Component({
   selector: 'app-movie-detail',
@@ -22,6 +24,8 @@ export class MovieDetailComponent implements OnInit {
   credits: Array<IMovieCast>;
   movieVideos: any;
   appConfig = API_CONFIG;
+  moviesSimilar: Array<IMovie>;
+  config: SwiperOptions;
   constructor(private route: ActivatedRoute, private router: Router, private moviesService: MoviesService) { }
 
   ngOnInit() {
@@ -40,6 +44,7 @@ export class MovieDetailComponent implements OnInit {
       this.getDetail(this.menuType, this.movieID);
       this.getCredits(this.menuType, this.movieID);
       this.getVideos(this.menuType, this.movieID);
+      this.getSimilarMovies(this.menuType, this.movieID);
     });
 
   }
@@ -67,7 +72,10 @@ export class MovieDetailComponent implements OnInit {
         if (!data || !data.cast) {
           return;
         }
-        this.credits = data.cast.slice(0, 5);
+        this.credits = data.cast;
+        if (data.cast.length > 10) {
+          this.credits = data.cast.slice(0, 10);
+        }
       }
     })
   }
@@ -79,7 +87,17 @@ export class MovieDetailComponent implements OnInit {
           return;
         }
         this.movieVideos = data.results;
-        console.log("movieVideos: ", this.movieVideos);
+        this.movieVideos.map((item: IMovieVideo) => {
+          item.trailer = this.appConfig.TRAILER_VIDEO(item.key);
+        });
+      }
+    })
+  }
+
+  getSimilarMovies(categories: String, id: Number) {
+    this.moviesService.getSimilar(categories, id).subscribe({
+      next: (data: IMovieResponse) => {
+        this.moviesSimilar = data.results;
       }
     })
   }

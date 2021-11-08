@@ -1,0 +1,16 @@
+.watch-movie {
+    padding: 0rem 9.375rem;
+    padding-top: 9rem;
+    &__player {
+        height: 90vh;
+    }
+    &__content {
+        h3 {
+            padding-top: 2rem;
+            font-weight: 600;
+        }
+        &--release {
+            padding: 1rem 0;
+        }
+    }
+}

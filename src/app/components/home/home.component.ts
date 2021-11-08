@@ -4,6 +4,7 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { MOVIE_TYPE } from 'src/app/constants/api.constant';
 import { MoviesService } from 'src/app/services/movies.service';
 import { HomeService } from 'src/app/services/home.service';
+import { IMovieResponse } from 'src/app/models/movie';
 
 @Component({
   selector: 'app-home',
@@ -32,16 +33,10 @@ export class HomeComponent implements OnInit {
     // });
   }
 
-  loading() {
-    const loadingElement = document.querySelector('.app-loading');
-    loadingElement.classList.add('loaded');
-    setTimeout(() => loadingElement.classList.remove('loaded'), 350);
-  }
-
   getListByType() {
     // Get list movies trending
     this.moviesService.getListByType(CATEGORIES.MOVIES, this.movieType.POPULAR).subscribe({
-      next: (data: any) => {
+      next: (data: IMovieResponse) => {
         if (!data || !data.results) {
           return;
         }
@@ -50,7 +45,7 @@ export class HomeComponent implements OnInit {
     });
     // Get list movies top rate
     this.moviesService.getListByType(CATEGORIES.MOVIES, this.movieType.TOP_RATE).subscribe({
-      next: (data: any) => {
+      next: (data: IMovieResponse) => {
         if (!data || !data.results) {
           return;
         }
@@ -59,7 +54,7 @@ export class HomeComponent implements OnInit {
     });
     // Get list TV series trending
     this.moviesService.getListByType(CATEGORIES.TV_SERIES, this.tvType.POPULAR).subscribe({
-      next: (data: any) => {
+      next: (data: IMovieResponse) => {
         if (!data || !data.results || !data.total_pages) {
           return;
         }

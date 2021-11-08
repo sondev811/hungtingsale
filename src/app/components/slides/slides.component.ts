@@ -3,7 +3,8 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { API_CONFIG, MOVIE_TYPE } from 'src/app/constants/api.constant';
 import { IAPIResponse } from 'src/app/models/api.model';
 import { MoviesService } from 'src/app/services/movies.service';
-import { SwiperOptions } from 'swiper';
+import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
+  SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-slides',
@@ -12,30 +13,27 @@ import { SwiperOptions } from 'swiper';
 })
 
 export class SlidesComponent implements OnInit {
+  @ViewChild(SwiperComponent) componentRef: SwiperComponent;
+  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
   movies = [];
   isOpenTrailer = false;
-  config: SwiperOptions;
   appConfig = API_CONFIG;
   trailerVideo = API_CONFIG.TRAILER_VIDEO('video');
+  config: SwiperConfigInterface = {
+    direction: 'horizontal',
+    slidesPerView: 1,
+    loop: true,
+    centeredSlides: false,
+    speed: 1000,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: true
+    },
+    grabCursor: true
+  };
   constructor(private movieService: MoviesService) { }
-  async ngOnInit() {
-    await this.getMovies();
-    this.config = {
-      loop: true,
-      // autoplay: {
-      //   delay: 7000,
-      //   pauseOnMouseEnter: true,
-      //   disableOnInteraction: false
-      // },
-      grabCursor: true,
-      spaceBetween: 0,
-      speed: 1000,
-      on: {
-        slideChange: () => {
-          this.closeAllModal();
-        }
-      }
-    };
+  ngOnInit() {
+    this.getMovies();
   }
 
   getMovies() {
@@ -62,6 +60,7 @@ export class SlidesComponent implements OnInit {
   }
 
   openTrailer(videoId: Number) {
+    this.componentRef.directiveRef.stopAutoplay();
     const modal = document.getElementsByClassName(`trailer-modal-${videoId}`);
     if (modal && modal.length > 1) {
       for (let i = 0; i < modal.length; i++) {
@@ -74,6 +73,7 @@ export class SlidesComponent implements OnInit {
   }
 
   closeTrailerModal(videoId: Number) {
+    this.componentRef.directiveRef.startAutoplay();
     const modal = document.getElementsByClassName(`trailer-modal-${videoId}`);
     if (modal && modal.length > 1) {
       for (let i = 0; i < modal.length; i++) {
@@ -87,6 +87,7 @@ export class SlidesComponent implements OnInit {
   }
 
   closeAllModal() {
+    this.componentRef.directiveRef.startAutoplay();
     const allModal = document.getElementsByClassName('slide-content__modaltrailer');
     for (let i = 0; i < allModal.length; i++) {
       allModal[i].classList.remove('open');

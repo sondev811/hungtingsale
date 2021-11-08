@@ -2,7 +2,9 @@ export const CATEGORIES = {
     HOME: 'Home',
     MOVIES: 'Movies',
     TV_SERIES: 'TV Series',
-    GENRES: 'Genres'
+    GENRES: 'Genres',
+    YOUTUBE: 'YouTube',
+    SIMILAR_MOVIES: 'Similar Video'
 };
 export const EMPTY_MOVIE = {
     list: [],

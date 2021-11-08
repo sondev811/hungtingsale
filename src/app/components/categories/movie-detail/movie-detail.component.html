@@ -8,7 +8,7 @@
     </div>
     <div class="movie-content__information">
       <div class="movie-content__information__title">
-        {{ movieData.title || movieData.name}}
+        {{ movieData.title || movieData.name }}
       </div>
       <div class="movie-content__information__genres">
         <span 
@@ -16,18 +16,43 @@
           [routerLink]="menuType === categories.MOVIES ? ['/movies/genre', item.name] : ['/tv-series/genre', item.name]">
           {{item.name}}</span>
       </div>
+      <div>
+        Release date: {{ movieData.release_date }}
+      </div>
       <div class="movie-content__information__overview">
         {{ movieData.overview }}
       </div>
-      <div class="movie-content__information__cast">
-        <h5>Casts</h5>
-        <div class="movie-content__information__cast__infor">
-          <div class="" *ngFor="let credit of credits">
-            <img src="{{appConfig.W500IMAGE(credit.profile_path)}}" alt="">
-            <p>{{ credit.name || name.original_name }}</p>
-          </div>
-        </div>
+      <div>Ratings: {{movieData.vote_average}} ({{movieData.vote_count}} votes)</div>
+      <div class="movie-content__information__button">
+        <button [routerLink]="menuType === categories.MOVIES ? ['/movies/watch', movieID] : ['/tv-series/watch', movieID]">
+          Watch Now
+        </button>
       </div>
+    </div>
+  </div>
+  <div class="movie-casting">
+    <h3>Casts</h3>
+    <div class="movie-casting__info">
+      <div class="" *ngFor="let credit of credits">
+        <img src="{{appConfig.W500IMAGE(credit.profile_path)}}" alt="">
+        <p>{{ credit.name || name.original_name }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="movie-trailer">
+    <div class="movie-trailer__item" *ngFor="let video of movieVideos">
+      <div class="movie-trailer__item__name" *ngIf="video.site === categories.YOUTUBE">{{video.name}}:</div>
+      <div class="movie-trailer__item__video" *ngIf="video.site === categories.YOUTUBE">
+        <iframe [src]="video.trailer | safe: 'resourceUrl'" id="ytplayer" frameborder="0" width="100%" height="100%"></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="movie-similar" *ngIf="moviesSimilar && moviesSimilar.length">
+    <div class="movie-similar__name">
+      <h3>{{categories.SIMILAR_MOVIES}}</h3>
+    </div>
+    <div class="movie-similar__list">
+      <app-movie-list  [category]="menuType" [movieType]="" [movieList]="moviesSimilar"></app-movie-list>
     </div>
   </div>
 </section>

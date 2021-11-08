@@ -47,12 +47,8 @@ export class MoviesService {
     return this.http.get(`${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.CREDITS}`, {});
   }
 
-  getSimilarMovie(id: Number) {
-    return this.http.get(CATEGORY.MOVIE + id + CATEGORY.SIMILAR, {});
-  }
-
-  getSimilarTV(id: Number) {
-    return this.http.get(CATEGORY.TV + id + CATEGORY.SIMILAR, {});
+  getSimilar(category: String, id: Number) {
+    return this.http.get(`${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.SIMILAR}`, {});
   }
 
 }

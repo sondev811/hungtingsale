@@ -9,4 +9,5 @@ export interface IMovieVideo {
     site: String;
     size: Number;
     type: String;
+    trailer: String;
 }

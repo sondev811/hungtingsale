@@ -22,9 +22,7 @@ import { GenreModule } from './components/genre/genre.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    CategoriesModule,
-    GenreModule
+    HttpClientModule
   ],
   providers: [HttpClientService],
   bootstrap: [AppComponent]
