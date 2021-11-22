@@ -2,7 +2,7 @@
 @import '../../../scss/variable.scss';
 
 .slide-container {
-    height: 100vh;
+    height: 110vh;
     @include tablet {
         height: 66vh!important;
         padding: 0rem 6.375rem;
@@ -72,7 +72,7 @@
                 }
             }
             &__title {
-                font-size: 5rem;
+                font-size: 3.5rem;
                 font-weight: 700;
                 line-height: 1;
                 @include tablet {

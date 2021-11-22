@@ -1,0 +1,8 @@
+@import '../../../scss/variable.scss';
+@import '../../../scss/mixin.scss';
+.movie-list-container {
+    margin-bottom: 3rem;
+    @include tablet {
+        margin-bottom: 0rem;
+    }
+}

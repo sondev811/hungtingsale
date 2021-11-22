@@ -26,7 +26,7 @@ export class SlidesComponent implements OnInit {
     centeredSlides: false,
     speed: 1000,
     autoplay: {
-      delay: 5000,
+      delay: 10000,
       disableOnInteraction: true
     },
     grabCursor: true

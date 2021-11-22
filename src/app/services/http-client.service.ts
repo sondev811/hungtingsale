@@ -17,7 +17,7 @@ export class HttpClientService {
     getURL(url: string, params) {
       if (url) {
         const urlWithParams = this.handleParams(params);
-        url = `${API_CONFIG.BASE_URL}${url}?api_key=${environment.API_KEY}&language=en-US${urlWithParams}`;
+        url = `${API_CONFIG.BASE_URL}${url}?api_key=${API_CONFIG.API_KEY}&language=en-US${urlWithParams}`;
       }
       return url;
     }

@@ -2,7 +2,8 @@ export const API_CONFIG = {
     BASE_URL: 'https://api.themoviedb.org/3/',
     ORIGINAL_IMAGE: (path) => `https://image.tmdb.org/t/p/original${path}`,
     W500IMAGE: (path) => `https://image.tmdb.org/t/p/w500${path}`,
-    TRAILER_VIDEO: (path) => `https://www.youtube-nocookie.com/embed/${path}`
+    TRAILER_VIDEO: (path) => `https://www.youtube-nocookie.com/embed/${path}`,
+    API_KEY: '88d5807254829cdff6bdb90fea9dbefb'
 };
 
 export const CATEGORY = {
