@@ -34,8 +34,8 @@
     <h3>Casts</h3>
     <div class="movie-casting__info">
       <div class="" *ngFor="let credit of credits">
-        <img src="{{appConfig.W500IMAGE(credit.profile_path)}}" alt="">
-        <p>{{ credit.name || name.original_name }}</p>
+        <img *ngIf="credit.profile_path" src="{{appConfig.W500IMAGE(credit.profile_path)}}" alt="">
+        <p *ngIf="credit.profile_path && (credit.name || name.original_name)">{{ credit.name || name.original_name }}</p>
       </div>
     </div>
   </div>

@@ -7,7 +7,8 @@
     top: 0;
     left: 0;
     transition: .3s all;
-    @include mobile {
+    @include tablet {
+        padding: 0px 2.375rem;
     }
     .header-wrap {
         @include flex(center, space-between);

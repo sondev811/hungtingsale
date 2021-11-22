@@ -6,7 +6,7 @@
   <div class="movie-list-container__content">
     <swiper *ngIf="config && movieList && movieList.length" [config]="config">
       <div class="swiper-slide" *ngFor="let movie of movieList" >
-          <div class="slide-content" [routerLink]="category === categories.MOVIES ? ['/movies/detail', movie.id] : ['/tv-series/detail', movie.id]">
+          <div *ngIf="movie.poster_path" class="slide-content" [routerLink]="category === categories.MOVIES ? ['/movies/detail', movie.id] : ['/tv-series/detail', movie.id]">
               <img src={{appConfig.W500IMAGE(movie.poster_path)}} alt="movie.poster_path">
               <div class="play-button">
                 <button><i class='bx bx-play'></i></button>

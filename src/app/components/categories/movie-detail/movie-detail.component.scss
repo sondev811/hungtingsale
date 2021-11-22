@@ -1,6 +1,9 @@
 @import '../../../../scss/mixin.scss';
 @import '../../../../scss/variable.scss';
 .header {
+    @include tablet {
+        height: 66vh;
+    }
     height: 85vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -25,26 +28,36 @@
     }
 }
 .movie-content {
-   padding: 0 6.375rem;
-   @include flex(flex-start, flex-start);
-   margin-top: -26.5rem;
-   max-width: 1260px;
-   margin-left: auto;
-   margin-right: auto;
-   position: relative;
-   &__poster {
-       flex: 1;
-       height: 32rem;
-       &__background {
-        height: 100%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        border-radius: 1.875rem;
-       }
-   }
-   &__information {
+    @include tablet {
+        margin-top: -35.5rem;
+        padding: 0 5.375rem;
+    }
+    padding: 0 6.375rem;
+    @include flex(flex-start, flex-start);
+    margin-top: -26.5rem;
+    max-width: 1260px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    &__poster {
+        @include tablet {
+            display: none;
+        }
+        flex: 1;
+        height: 32rem;
+        &__background {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-radius: 1.875rem;
+        }
+    }
+    &__information {
         width: 70%;
+        @include tablet {
+            width: 100%;
+        }
         padding-left: 2rem;
         position: relative;
         &__title {
@@ -53,10 +66,10 @@
         }
         &__genres {
             margin-bottom: 2.5rem!important;
-            span:not(:first-child) {
-                margin-left: .5rem;
-            }
             span {
+                margin-bottom: .5rem;
+                margin-right: .5rem;
+                display: inline-block;
                 cursor: pointer;
                 padding: .5rem 1.5rem;
                 border: 3px solid #fff;
@@ -92,7 +105,11 @@
     }
 }
 .movie-casting {
-    padding: 3rem 9.375rem;
+    padding: 0rem 9.375rem;
+    @include tablet {
+        padding: 0rem 3.375rem;
+        padding-top: 7rem;
+    }
     padding-bottom: 0;
     h3 {
         font-weight: 600;
@@ -116,6 +133,9 @@
 }
 .movie-trailer {
     padding: 2rem 9.375rem;
+    @include tablet {
+        padding: 2rem 3.375rem;
+    }
     &__item {
         padding: 2rem 0;
         &__name {
@@ -125,6 +145,9 @@
         }
         &__video {
             height: 700px;
+            @include tablet {
+                height: 410px;
+            }
         }
 
     }
@@ -133,6 +156,9 @@
     &__name {
         h3 {
             padding: 0rem 9.375rem;
+            @include tablet {
+                padding: 0rem 3.375rem;
+            }
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 0;
@@ -141,5 +167,8 @@
     }
     &__list {
         padding-top: 2rem;
+        @include tablet {
+            padding-top: 0rem;
+        }
     }
 }

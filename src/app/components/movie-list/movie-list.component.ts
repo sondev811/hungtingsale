@@ -39,19 +39,19 @@ export class MovieListComponent implements OnInit, OnChanges, AfterViewInit {
     centeredSlides: false,
     breakpoints: {
       1024: {
-        slidesPerView: 6,
+        slidesPerView: 4,
         spaceBetween: 12
       },
       800: {
-        slidesPerView: 4,
+        slidesPerView: 3,
         spaceBetween: 10
       },
       500: {
-        slidesPerView: 2,
+        slidesPerView: 1,
         spaceBetween: 10
       },
       320: {
-        slidesPerView: 2,
+        slidesPerView: 1,
         spaceBetween: 10
       }
     }
