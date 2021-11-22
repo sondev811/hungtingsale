@@ -14,7 +14,7 @@
         width: 100%;
         height: 100%;
         content: '';
-        background-image: linear-gradient(to top, #0f0f0f, rgba($color: #000000, $alpha: .5));
+        background-image: linear-gradient(to top, $background-body, rgba($color: #000000, $alpha: .5));
         top: 0;
         left: 0;
         position: absolute;
@@ -72,13 +72,13 @@
                 display: inline-block;
                 cursor: pointer;
                 padding: .5rem 1.5rem;
-                border: 3px solid #fff;
+                border: 3px solid $text-color;
                 border-radius: 20px;
                 font-size: .8rem;
                 font-weight: 600;
                 background-color: $background-body;
                 &:hover {
-                    background-color: #fff;
+                    background-color: $text-color;
                     color: $main-color;
                 }
             }   
@@ -88,7 +88,7 @@
                 width: 9rem;
                 height: 2.5rem;
                 border-radius: 20px;
-                color: #fff;
+                color: $text-color;
                 font-weight: 600;
                 margin-right: 1.2rem;
                 border: 2px $main-color solid;

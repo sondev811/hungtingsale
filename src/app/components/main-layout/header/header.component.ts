@@ -39,9 +39,9 @@ export class HeaderComponent implements OnInit {
     if (btnToTop) {
       window.addEventListener('scroll', () => {
         if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-          btnToTop.classList.add('active');
+          btnToTop.classList.add('active-top');
         } else {
-          btnToTop.classList.remove('active');
+          btnToTop.classList.remove('active-top');
         }
       });
 

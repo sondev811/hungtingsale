@@ -9,6 +9,15 @@ body {
     @include mobile {
         margin-bottom: 3rem;
     }
+    ::selection {
+        background: $main-color; 
+    }
+    ::-moz-selection {
+        background: $main-color; 
+    }
+    ::-webkit-selection {
+        background: $main-color; 
+    }
 }
 
 *{
@@ -83,8 +92,8 @@ img {
         height: 64px;
         margin: 0 auto;
         border-radius: 50%;
-        border: 6px solid #fff;
-        border-color: #fff transparent #fff transparent;
+        border: 6px solid $text-color;
+        border-color: $text-color transparent $text-color transparent;
         animation: lds-dual-ring 1.2s linear infinite;
         }
     @keyframes lds-dual-ring {
