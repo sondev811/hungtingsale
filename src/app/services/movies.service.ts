@@ -25,7 +25,7 @@ export class MoviesService {
   }
 
   getListByGenre(category: String , id: Number, page: Number) {
-    const url = `${CATEGORY.DISCOVER}${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}`
+    const url = `${CATEGORY.DISCOVER}${category === CATEGORIES.MOVIES ? CATEGORY.DISCOVER_MOVIE : CATEGORY.DISCOVER_TV}`
     return this.http.get(url, {with_genres: id, page});
   }
 
@@ -35,7 +35,7 @@ export class MoviesService {
   }
 
   search(query: String, page: number, category: String) {
-    const url = `${CATEGORY.SEARCH}${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}`;
+    const url = `${CATEGORY.SEARCH}${category === CATEGORIES.MOVIES ? CATEGORY.DISCOVER_MOVIE : CATEGORY.DISCOVER_TV}`;
     return this.http.get(url, {page, query});
   }
 

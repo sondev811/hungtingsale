@@ -15,7 +15,9 @@ export const CATEGORY = {
     SIMILAR: '/similar',
     GENRE: 'genre/',
     DISCOVER: 'discover/',
-    LIST: '/list'
+    LIST: '/list',
+    DISCOVER_MOVIE: 'movie',
+    DISCOVER_TV: 'tv',
 };
 
 export const MOVIE_TYPE = {
