@@ -24,4 +24,15 @@ export interface IMovieDetail {
     video: Boolean;
     vote_average: Number;
     vote_count: Number;
+    seasons: Array<IMovieSeason>
+}
+
+interface IMovieSeason {
+    air_date: string;
+    episode_count: number;
+    id: number;
+    name: string;
+    overview: string;
+    poster_path: string;
+    season_number: number;
 }

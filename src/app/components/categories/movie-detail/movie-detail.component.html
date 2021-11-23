@@ -16,14 +16,14 @@
           [routerLink]="menuType === categories.MOVIES ? ['/movies/genre', item.name] : ['/tv-series/genre', item.name]">
           {{item.name}}</span>
       </div>
-      <div>
+      <div *ngIf="movieData.release_date">
         Release date: {{ movieData.release_date }}
       </div>
       <div class="movie-content__information__overview">
         {{ movieData.overview }}
       </div>
       <div>Ratings: {{movieData.vote_average}} ({{movieData.vote_count}} votes)</div>
-      <div class="movie-content__information__button">
+      <div class="movie-content__information__button" *ngIf="!movieData.seasons || !movieData.seasons.length">
         <button [routerLink]="menuType === categories.MOVIES ? ['/movies/watch', movieID] : ['/tv-series/watch', movieID]">
           Watch Now
         </button>
@@ -39,11 +39,33 @@
       </div>
     </div>
   </div>
+  <div *ngIf="movieData.seasons && movieData.seasons.length" class="movie-season">
+    <h3>Seasons: </h3>
+    <div class="movie-season__item">
+      <div *ngFor="let item of movieData.seasons">
+          <div *ngIf="item.episode_count > 0" [routerLink]="['/tv-series/watch', movieID, item.season_number, 1]">
+            <div class="movie-season__item--poster" >
+              <img src="{{appConfig.W500IMAGE(item.poster_path)}}" alt="">
+              <div class="play-button">
+                <button><i class='bx bx-play'></i></button>
+              </div>
+            </div>
+            <div class="movie-season__item--info" >
+              <div class="ovie-season__item--info--number" *ngIf="item.air_date">{{item.name}}({{item.air_date.substring(0, 4)}}) - {{item.episode_count}} episodes</div>
+              <div class="ovie-season__item--info--number" *ngIf="!item.air_date">{{item.name}} - {{item.episode_count}} episodes</div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
   <div class="movie-trailer">
-    <div class="movie-trailer__item" *ngFor="let video of movieVideos">
-      <div class="movie-trailer__item__name" *ngIf="video.site === categories.YOUTUBE">{{video.name}}:</div>
-      <div class="movie-trailer__item__video" *ngIf="video.site === categories.YOUTUBE">
-        <iframe [src]="video.trailer | safe: 'resourceUrl'" id="ytplayer" frameborder="0" width="100%" height="100%"></iframe>
+    <h3>Trailer: </h3>
+    <div class="movie-trailer__item">
+      <div class="" *ngFor="let video of movieVideos">
+        <div class="movie-trailer__item__video" *ngIf="video.site === categories.YOUTUBE">
+          <iframe [src]="video.trailer | safe: 'resourceUrl'" id="ytplayer" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+        <div class="movie-trailer__item__name" *ngIf="video.site === categories.YOUTUBE">{{video.name}}:</div>
       </div>
     </div>
   </div>

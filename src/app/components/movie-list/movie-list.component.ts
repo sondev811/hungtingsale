@@ -31,12 +31,15 @@ export class MovieListComponent implements OnInit, OnChanges, AfterViewInit {
   config: SwiperConfigInterface = {
     direction: 'horizontal',
     slidesPerView: 5,
-    speed: 500,
+    speed: 100,
     mousewheel: true,
     scrollbar: true,
     spaceBetween: 20,
     grabCursor: true,
     centeredSlides: false,
+    autoplay: {
+      delay: 5000
+    },
     breakpoints: {
       1024: {
         slidesPerView: 4,

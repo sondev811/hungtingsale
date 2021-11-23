@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: '', component: CategoriesComponent },
   { path: 'genre/:name', component: CategoriesComponent },
   { path: 'detail/:id', component: MovieDetailComponent },
-  { path: 'watch/:id', component: WatchMovieComponent }
+  { path: 'watch/:id', component: WatchMovieComponent },
+  { path: 'watch/:id/:season/:episode', component: WatchMovieComponent }
 ];
 
 @NgModule({

@@ -15,6 +15,9 @@ export class WatchMovieComponent implements OnInit {
   movieUrl: string;
   menuType: string;
   movieData: IMovieDetail;
+  season: string;
+  episode: string;
+  episodes;
   constructor(private route: ActivatedRoute, private router: Router, private moviesService: MoviesService) { }
 
   ngOnInit() {
@@ -26,23 +29,44 @@ export class WatchMovieComponent implements OnInit {
       this.menuType = this.capitalizeFirstLetter(this.router.url.slice(1));
       if (this.menuType.includes(CATEGORIES.MOVIES)) {
         this.menuType = CATEGORIES.MOVIES;
+        this.moviesService.getDetail(this.menuType, this.movieID).subscribe({
+          next: (data: IMovieDetail) => {
+            if (!data) {
+              return;
+            }
+            this.movieData = data;
+            this.movieUrl = `https://www.2embed.ru/embed/tmdb/movie?id=${this.movieID}`;
+          }
+        });
       } else {
         this.menuType = CATEGORIES.TV_SERIES;
-      }
-      this.moviesService.getDetail(this.menuType, this.movieID).subscribe({
-        next: (data: IMovieDetail) => {
-          if (!data) {
-            return;
-          }
-          this.movieData = data;
-          this.movieUrl = `https://www.2embed.ru/embed/tmdb/movie?id=${this.movieID}`;
+        if (!params['season'] || !params['episode']) {
+          this.router.navigate(['/404']);
+          return;
         }
-      });
+        this.season = params['season'];
+        this.episode = params['episode'];
+        this.moviesService.getDetail(this.menuType, this.movieID).subscribe({
+          next: (data: IMovieDetail) => {
+            if (!data) {
+              return;
+            }
+            this.movieData = data;
+            this.episodes = data.seasons.find(item => item.season_number === parseFloat(this.season));
+            console.log(this.movieData);
+            this.movieUrl = `https://www.2embed.ru/embed/tmdb/tv?id=${this.movieID}&s=${this.season}&e=${this.episode}`;
+          }
+        });
+      }
     });
   }
 
   capitalizeFirstLetter(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  counter(i: number) {
+    return new Array(i);
   }
 
 }

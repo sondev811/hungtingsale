@@ -106,9 +106,10 @@
 }
 .movie-casting {
     padding: 0rem 9.375rem;
+    padding-top: 3.375rem;
     @include tablet {
         padding: 0rem 3.375rem;
-        padding-top: 7rem;
+        padding-top: 9rem;
     }
     padding-bottom: 0;
     h3 {
@@ -131,23 +132,85 @@
         }
     }
 }
+.movie-season {
+    padding: 2rem 9.375rem;
+    @include tablet {
+        padding: 2rem 3.375rem;
+    } 
+    h3 {
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    &__item {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(12.625rem, 1fr));
+        gap: 10px;
+        cursor: pointer;
+        &--info {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+        &--poster {
+            position: relative;
+            .play-button {
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                @include flex(center, center);
+                width: 100%;
+                height: 100%;
+                background-color: rgba($color: #000000, $alpha: .7);
+                transition: .3s ease all;
+                button {
+                    font-size: 17px;
+                    border: 2px $main-color solid;
+                    background-color: $main-color;
+                    box-shadow: 0px 0 20px $main-color;
+                    width: 5rem;
+                    height: 3rem;
+                    border-radius: 25px;
+                    color: $text-color;
+                    font-weight: 600;
+                    transition: .3s ease all;
+                    transform: scale(0);
+                }
+                
+            }
+        }
+        &>div:hover {
+            .play-button {
+                opacity: 1;
+            }
+            .play-button button {
+                transform: scale(1);
+            }
+            .movie-season__item--info {
+                color: $main-color;
+            }
+        } 
+    }
+}
 .movie-trailer {
+    h3 {
+        font-weight: 600;
+    }
     padding: 2rem 9.375rem;
     @include tablet {
         padding: 2rem 3.375rem;
     }
     &__item {
-        padding: 2rem 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(15.625rem, 1fr));
+        gap: 20px;
+        padding: 1rem 0;
         &__name {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 600;
             padding-bottom: 1rem;
         }
         &__video {
-            height: 700px;
-            @include tablet {
-                height: 410px;
-            }
         }
 
     }

@@ -62,6 +62,7 @@ export class MovieDetailComponent implements OnInit {
         data.backdrop_path = API_CONFIG.ORIGINAL_IMAGE(data.backdrop_path || data.poster_path);
         data.poster_path = API_CONFIG.ORIGINAL_IMAGE(data.poster_path || data.backdrop_path);
         this.movieData = data;
+        console.log(data);
       }
     });
   }
