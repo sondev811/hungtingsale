@@ -51,4 +51,8 @@ export class MoviesService {
     return this.http.get(`${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.SIMILAR}`, {});
   }
 
+  getVisitors() {
+    return this.http.getVisitors('https://api.countapi.xyz/hit/smovies-seven.vercel.app/visits');
+  }
+
 }

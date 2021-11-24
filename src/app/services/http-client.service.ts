@@ -64,4 +64,26 @@ export class HttpClientService {
     });
   }
 
+  getVisitors(url: string) {
+    const headers = this.getHeader();
+    this.loading = true;
+    return new Observable(subscriber => {
+      this.http.get(url, { headers })
+        .subscribe({
+          next: (res: Object) => {
+            setTimeout(() => {
+              this.loading = false;
+            }, 200);
+            subscriber.next(res);
+          },
+          error: (err) => {
+            this.loading = false;
+            // this.handleError(err, subscriber, () => {
+            //   this.get(url).subscribe(subscriber);
+            // });
+          }
+        });
+    });
+  }
+
 }
