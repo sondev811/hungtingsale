@@ -62,7 +62,6 @@ export class MovieDetailComponent implements OnInit {
         data.backdrop_path = API_CONFIG.ORIGINAL_IMAGE(data.backdrop_path || data.poster_path);
         data.poster_path = API_CONFIG.ORIGINAL_IMAGE(data.poster_path || data.backdrop_path);
         this.movieData = data;
-        console.log(data);
       }
     });
   }
@@ -101,6 +100,16 @@ export class MovieDetailComponent implements OnInit {
         this.moviesSimilar = data.results;
       }
     })
+  }
+
+  scrollToSeason() {
+    const season = document.getElementById('season');
+    if (!season) {
+      return;
+    }
+    const yOffset = -50;
+    const y = season.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({top: y, behavior: 'smooth'});
   }
 
 }

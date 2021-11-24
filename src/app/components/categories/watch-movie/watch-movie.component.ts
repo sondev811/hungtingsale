@@ -53,7 +53,6 @@ export class WatchMovieComponent implements OnInit {
             }
             this.movieData = data;
             this.episodes = data.seasons.find(item => item.season_number === parseFloat(this.season));
-            console.log(this.movieData);
             this.movieUrl = `https://www.2embed.ru/embed/tmdb/tv?id=${this.movieID}&s=${this.season}&e=${this.episode}`;
           }
         });

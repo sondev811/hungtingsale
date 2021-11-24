@@ -64,7 +64,6 @@ export class CategoriesComponent implements OnInit {
           if (!data || !data.results || !data.total_pages) {
             return;
           }
-          console.log(data, 'data');
           this.movieList = data.results;
           this.movieUpcomingList = this.movieList;
           this.totalPage = data.total_pages;

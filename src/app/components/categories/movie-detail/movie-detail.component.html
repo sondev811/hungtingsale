@@ -28,6 +28,11 @@
           Watch Now
         </button>
       </div>
+      <div class="movie-content__information__button" *ngIf="movieData.seasons">
+          <button (click)="scrollToSeason()">
+            Watch Now
+          </button>
+      </div>
     </div>
   </div>
   <div class="movie-casting">
@@ -39,7 +44,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="movieData.seasons && movieData.seasons.length" class="movie-season">
+  <div *ngIf="movieData.seasons && movieData.seasons.length" class="movie-season" id="season">
     <h3>Seasons: </h3>
     <div class="movie-season__item">
       <div *ngFor="let item of movieData.seasons">
