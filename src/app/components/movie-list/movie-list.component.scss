@@ -49,6 +49,10 @@
             transition: .3s all ease;
             cursor: pointer;
             font-weight: 600;
+            @include mobile {
+                padding-left: .5rem;
+                font-size: 1.5rem;
+            }
         } 
     }
     
