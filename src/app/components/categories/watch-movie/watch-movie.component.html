@@ -1,6 +1,6 @@
 <div class="watch-movie">
   <div class="watch-movie__player">
-    <iframe *ngIf="movieUrl" [src]="movieUrl | safe: 'resourceUrl'" frameborder="0" width="100%" height="100%"></iframe>
+    <iframe *ngIf="movieUrl" [src]="movieUrl | safe: 'resourceUrl'" frameborder="0" width="100%" height="100%" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
   </div>
   <div class="watch-movie__content" *ngIf="movieData">
     <h3>{{ movieData.title || movieData.name }} <span *ngIf="season">({{episodes.name}})</span></h3>
