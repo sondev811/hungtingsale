@@ -1,8 +1,20 @@
 <div class="watch-movie">
-  <div class="watch-movie__player">
-    <iframe *ngIf="movieUrl" [src]="movieUrl | safe: 'resourceUrl'" frameborder="0" width="100%" height="100%" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+  <div class="watch-movie__player" *ngIf="channelActive === CHANNEL_ACTIVE.imdb ; else elseChannel">
+    <iframe *ngIf="movieUrlTMDB" [src]="movieUrlIMDB | safe: 'resourceUrl'" frameborder="0" width="100%" height="100%" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
   </div>
+  <ng-template #elseChannel>
+    <div class="watch-movie__player">
+      <iframe *ngIf="movieUrlTMDB" [src]="movieUrlTMDB | safe: 'resourceUrl'" frameborder="0" width="100%" height="100%" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+    </div>
+  </ng-template>
   <div class="watch-movie__content" *ngIf="movieData">
+    <div class="watch-movie__content--channel">
+      <p>Chọn kênh khác nếu phim không có vietsub hoặc phim không load được:</p>
+      <div >
+        <div [ngClass]="{active: channelActive === CHANNEL_ACTIVE.imdb}" (click)="chooseChannel(CHANNEL_ACTIVE.imdb)">IMDB</div>
+        <div [ngClass]="{active: channelActive === CHANNEL_ACTIVE.tmdb}" (click)="chooseChannel(CHANNEL_ACTIVE.tmdb)">TMDB</div>
+      </div>
+    </div>
     <h3>{{ movieData.title || movieData.name }} <span *ngIf="season">({{episodes.name}})</span></h3>
     <div class="watch-movie__content--release" *ngIf="movieData.release_date">
       Release date: {{ movieData.release_date }}

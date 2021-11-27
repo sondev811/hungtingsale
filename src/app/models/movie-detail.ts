@@ -24,7 +24,17 @@ export interface IMovieDetail {
     video: Boolean;
     vote_average: Number;
     vote_count: Number;
-    seasons: Array<IMovieSeason>
+    seasons: Array<IMovieSeason>;
+    external_ids?: {
+        facebook_id?: Number;
+        freebase_id?: Number;
+        freebase_mid?: Number;
+        imdb_id?: String
+        instagram_id?: Number;
+        tvdb_id?: Number
+        tvrage_id?: Number;
+        twitter_id?: Number;
+    }
 }
 
 interface IMovieSeason {

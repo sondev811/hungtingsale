@@ -16,8 +16,30 @@
     }
     &__content {
         h3 {
-            padding-top: 2rem;
             font-weight: 600;
+        }
+        &--channel {
+            padding: 1rem 0;
+            *{
+                display: inline-block;
+            }
+            &>div {
+                div {
+                    margin-left: 10px;
+                    padding: 4px 12px;
+                    background-color: #000;
+                    font-weight: bold;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: .3s all;
+                    &:hover {
+                        background-color: $main-color;
+                    }
+                }
+                .active {
+                    background-color: $main-color;
+                }
+            }
         }
         &--release {
             padding: 1rem 0;

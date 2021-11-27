@@ -1,3 +1,4 @@
+import { CHANNEL_ACTIVE } from './../../../constants/base.constants';
 import { MoviesService } from './../../../services/movies.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,12 +13,15 @@ import { API_CONFIG } from 'src/app/constants/api.constant';
 })
 export class WatchMovieComponent implements OnInit {
   movieID: number;
-  movieUrl: string;
+  movieUrlIMDB: string;
+  movieUrlTMDB: string;
   menuType: string;
   movieData: IMovieDetail;
   season: string;
   episode: string;
   episodes;
+  CHANNEL_ACTIVE = CHANNEL_ACTIVE;
+  channelActive = CHANNEL_ACTIVE.imdb;
   constructor(private route: ActivatedRoute, private router: Router, private moviesService: MoviesService) { }
 
   ngOnInit() {
@@ -35,7 +39,8 @@ export class WatchMovieComponent implements OnInit {
               return;
             }
             this.movieData = data;
-            this.movieUrl = `https://www.2embed.ru/embed/tmdb/movie?id=${this.movieID}`;
+            this.movieUrlTMDB = `https://www.2embed.ru/embed/tmdb/movie?id=${this.movieID}`;
+            this.movieUrlIMDB = `https://dbgo.fun/imdb.php?id=${this.movieData.imdb_id}`;
           }
         });
       } else {
@@ -53,7 +58,8 @@ export class WatchMovieComponent implements OnInit {
             }
             this.movieData = data;
             this.episodes = data.seasons.find(item => item.season_number === parseFloat(this.season));
-            this.movieUrl = `https://www.2embed.ru/embed/tmdb/tv?id=${this.movieID}&s=${this.season}&e=${this.episode}`;
+            this.movieUrlTMDB = `https://www.2embed.ru/embed/tmdb/tv?id=${this.movieID}&s=${this.season}&e=${this.episode}`;
+            this.movieUrlIMDB = `https://dbgo.fun/imdbse.php?id=${this.movieData.external_ids.imdb_id}&s=${this.season}&e=${this.episode}`;
           }
         });
       }
@@ -66,6 +72,10 @@ export class WatchMovieComponent implements OnInit {
 
   counter(i: number) {
     return new Array(i);
+  }
+
+  chooseChannel(channel: string) {
+    this.channelActive = channel;
   }
 
 }

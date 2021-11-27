@@ -10,3 +10,7 @@ export const EMPTY_MOVIE = {
     list: [],
     total_pages: 1
 };
+export const CHANNEL_ACTIVE = {
+    imdb: 'IMDB',
+    tmdb: 'TMDB'
+}
