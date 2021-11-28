@@ -1,34 +1,34 @@
 export interface IMovieCredits {
     cast: Array<IMovieCast>;
     crew: Array<IMovieCrew>;
-    id: Number;
+    id: number;
 }
 
 export interface IMovieCast {
-    adult: Boolean;
-    cast_id: Number;
-    character: String;
-    credit_id: String;
-    gender: Number;
-    id: Number;
-    known_for_department: String;
-    name: String;
-    order: Number;
-    original_name: String;
-    popularity: Number;
-    profile_path: String;
+    adult: boolean;
+    cast_id: number;
+    character: string;
+    credit_id: string;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    order: number;
+    original_name: string;
+    popularity: number;
+    profile_path: string;
 }
 
 export interface IMovieCrew {
-    adult: Boolean;
-    credit_id: String;
-    department: String;
-    gender: Number;
-    id: Number;
-    job: String;
-    known_for_department: String;
-    name: String;
-    original_name: String;
-    popularity: Number;
-    profile_path: String;
+    adult: boolean;
+    credit_id: string;
+    department: string;
+    gender: number;
+    id: number;
+    job: string;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string;
 }

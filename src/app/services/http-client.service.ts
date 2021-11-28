@@ -35,15 +35,21 @@ export class HttpClientService {
     return urlWithParams;
   }
 
-  getHeader() {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return headers;
+  getHeader(isIMDB = false) {
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+    if (isIMDB) {
+      headers['x-rapidapi-host'] = 'imdb8.p.rapidapi.com';
+      headers['x-rapidapi-key'] = 'bbfdeb471emsh2b4cdfd3380f8e1p1f75fbjsn44bec000e75a';
+    }
+    return new HttpHeaders(headers);
   }
 
   get(url: string, params: any) {
     url = this.getURL(url, params);
     const headers = this.getHeader();
+    console.log(headers);
     this.loading = true;
     return new Observable(subscriber => {
       this.http.get(url, { headers })
@@ -66,6 +72,31 @@ export class HttpClientService {
 
   getVisitors(url: string) {
     const headers = this.getHeader();
+    console.log(headers);
+    this.loading = true;
+    return new Observable(subscriber => {
+      this.http.get(url, { headers })
+        .subscribe({
+          next: (res: Object) => {
+            setTimeout(() => {
+              this.loading = false;
+            }, 200);
+            subscriber.next(res);
+          },
+          error: (err) => {
+            this.loading = false;
+            // this.handleError(err, subscriber, () => {
+            //   this.get(url).subscribe(subscriber);
+            // });
+          }
+        });
+    });
+  }
+
+  getIMDBDetail(imdbID: string) {
+    const url = `https://imdb8.p.rapidapi.com/title/get-ratings?tconst=${imdbID}`;
+    const headers = this.getHeader(true);
+    console.log(headers);
     this.loading = true;
     return new Observable(subscriber => {
       this.http.get(url, { headers })

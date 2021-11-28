@@ -1,13 +1,13 @@
 export interface IMovieVideo {
-    id: String;
-    iso_639_1: String;
-    iso_3166_1: String;
-    key: String;
-    name: String;
-    official: Boolean;
-    published_at: String;
-    site: String;
-    size: Number;
-    type: String;
-    trailer: String;
+    id: string;
+    iso_639_1: string;
+    iso_3166_1: string;
+    key: string;
+    name: string;
+    official: boolean;
+    published_at: string;
+    site: string;
+    size: number;
+    type: string;
+    trailer: string;
 }

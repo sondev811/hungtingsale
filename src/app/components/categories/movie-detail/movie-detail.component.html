@@ -22,7 +22,7 @@
       <div class="movie-content__information__overview">
         {{ movieData.overview }}
       </div>
-      <div>Ratings: {{movieData.vote_average}} ({{movieData.vote_count}} votes)</div>
+      <div *ngIf="ratingInfo">Ratings: {{ratingInfo.rating}} ({{ratingInfo.ratingCount}} votes)</div>
       <div class="movie-content__information__button" *ngIf="!movieData.seasons || !movieData.seasons.length">
         <button [routerLink]="menuType === categories.MOVIES ? ['/movies/watch', movieID] : ['/tv-series/watch', movieID]">
           Watch Now

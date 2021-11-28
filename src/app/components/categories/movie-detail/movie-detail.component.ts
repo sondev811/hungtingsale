@@ -4,7 +4,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CATEGORIES } from 'src/app/constants/base.constants';
-import { IMovieDetail } from 'src/app/models/movie-detail';
+import { IMovieDetail, IRatingInfo } from 'src/app/models/movie-detail';
 import { API_CONFIG } from 'src/app/constants/api.constant';
 import { IMovieCast, IMovieCredits } from 'src/app/models/movie-cast';
 import { IMovieVideo } from 'src/app/models/video';
@@ -26,6 +26,7 @@ export class MovieDetailComponent implements OnInit {
   appConfig = API_CONFIG;
   moviesSimilar: Array<IMovie>;
   config: SwiperOptions;
+  ratingInfo: IRatingInfo;
   constructor(private route: ActivatedRoute, private router: Router, private moviesService: MoviesService) { }
 
   ngOnInit() {
@@ -62,6 +63,8 @@ export class MovieDetailComponent implements OnInit {
         data.backdrop_path = API_CONFIG.ORIGINAL_IMAGE(data.backdrop_path || data.poster_path);
         data.poster_path = API_CONFIG.ORIGINAL_IMAGE(data.poster_path || data.backdrop_path);
         this.movieData = data;
+        const imdbID = data.imdb_id || data.external_ids.imdb_id;
+        this.getIMDBRating(imdbID);
       }
     });
   }
@@ -98,6 +101,17 @@ export class MovieDetailComponent implements OnInit {
     this.moviesService.getSimilar(categories, id).subscribe({
       next: (data: IMovieResponse) => {
         this.moviesSimilar = data.results;
+      }
+    })
+  }
+
+  getIMDBRating(imdbID: string) {
+    this.moviesService.getIMDBRating(imdbID).subscribe({
+      next: (data: IRatingInfo) => {
+        if (!data) {
+          return;
+        }
+        this.ratingInfo = data;
       }
     })
   }

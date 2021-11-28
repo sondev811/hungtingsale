@@ -55,4 +55,8 @@ export class MoviesService {
     return this.http.getVisitors('https://api.countapi.xyz/hit/smovies-seven.vercel.app/visits');
   }
 
+  getIMDBRating(imdbID: string) {
+    return this.http.getIMDBDetail(imdbID);
+  }
+
 }

@@ -1,39 +1,39 @@
 export interface IMovieDetail {
-    adult: Boolean;
-    backdrop_path: String;
-    belongs_to_collection: Object;
-    budget: Number;
+    adult: boolean;
+    backdrop_path: string;
+    belongs_to_collection: object;
+    budget: number;
     genres: Array<any>;
-    homepage: String;
-    id: Number;
-    imdb_id: String;
-    original_language: String;
-    original_title: String;
-    overview: String;
-    popularity: Number;
-    poster_path: String;
+    homepage: string;
+    id: number;
+    imdb_id: string;
+    original_language: string;
+    original_title: string;
+    overview: string;
+    popularity: number;
+    poster_path: string;
     production_companies: Array<any>;
     production_countries: Array<any>;
-    release_date: String;
-    revenue: Number;
-    runtime: Number;
+    release_date: string;
+    revenue: number;
+    runtime: number;
     spoken_languages: Array<any>;
-    status: String;
-    tagline: String;
-    title: String;
-    video: Boolean;
-    vote_average: Number;
-    vote_count: Number;
+    status: string;
+    tagline: string;
+    title: string;
+    video: boolean;
+    vote_average: number;
+    vote_count: number;
     seasons: Array<IMovieSeason>;
     external_ids?: {
-        facebook_id?: Number;
-        freebase_id?: Number;
-        freebase_mid?: Number;
-        imdb_id?: String
-        instagram_id?: Number;
-        tvdb_id?: Number
-        tvrage_id?: Number;
-        twitter_id?: Number;
+        facebook_id?: number;
+        freebase_id?: number;
+        freebase_mid?: number;
+        imdb_id?: string
+        instagram_id?: number;
+        tvdb_id?: number
+        tvrage_id?: number;
+        twitter_id?: number;
     }
 }
 
@@ -45,4 +45,17 @@ interface IMovieSeason {
     overview: string;
     poster_path: string;
     season_number: number;
+}
+
+export interface IRatingInfo {
+    bottomRank: number;
+    canRate: boolean;
+    id: string;
+    rating: number;
+    ratingCount: number;
+    ratingsHistograms: object;
+    title: string;
+    titleType: string;
+    topRank: number;
+    year: number;
 }
