@@ -23,11 +23,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     // Load movies
     this.getListByType();
-    this.moviesService.getVisitors().subscribe({
-      next: (res: any) => {
-        console.log('Visitor: ', res.value);
-      }
-    })
      // this.moviesService.movieTrendingList.subscribe({
     //   next: (data) => {
     //     if (data && data.length) {

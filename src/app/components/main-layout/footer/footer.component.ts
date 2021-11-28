@@ -1,3 +1,4 @@
+import { MoviesService } from './../../../services/movies.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-
-  constructor() { }
+  viewsCount: number;
+  constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
+    this.moviesService.getVisitors().subscribe({
+      next: (res: any) => {
+        if (!res) {
+          return;
+        }
+        this.viewsCount = res.value;
+      }
+    })
   }
 
 }

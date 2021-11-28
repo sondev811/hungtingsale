@@ -49,7 +49,6 @@ export class HttpClientService {
   get(url: string, params: any) {
     url = this.getURL(url, params);
     const headers = this.getHeader();
-    console.log(headers);
     this.loading = true;
     return new Observable(subscriber => {
       this.http.get(url, { headers })
@@ -71,11 +70,9 @@ export class HttpClientService {
   }
 
   getVisitors(url: string) {
-    const headers = this.getHeader();
-    console.log(headers);
     this.loading = true;
     return new Observable(subscriber => {
-      this.http.get(url, { headers })
+      this.http.get(url, {})
         .subscribe({
           next: (res: Object) => {
             setTimeout(() => {
@@ -96,7 +93,6 @@ export class HttpClientService {
   getIMDBDetail(imdbID: string) {
     const url = `https://imdb8.p.rapidapi.com/title/get-ratings?tconst=${imdbID}`;
     const headers = this.getHeader(true);
-    console.log(headers);
     this.loading = true;
     return new Observable(subscriber => {
       this.http.get(url, { headers })
