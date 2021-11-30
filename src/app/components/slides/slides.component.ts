@@ -59,7 +59,7 @@ export class SlidesComponent implements OnInit {
     });
   }
 
-  openTrailer(videoId: Number) {
+  openTrailer(videoId: number) {
     this.componentRef.directiveRef.stopAutoplay();
     const modal = document.getElementsByClassName(`trailer-modal-${videoId}`);
     if (modal && modal.length > 1) {
@@ -72,7 +72,7 @@ export class SlidesComponent implements OnInit {
     this.isOpenTrailer = true;
   }
 
-  closeTrailerModal(videoId: Number) {
+  closeTrailerModal(videoId: number) {
     this.componentRef.directiveRef.startAutoplay();
     const modal = document.getElementsByClassName(`trailer-modal-${videoId}`);
     if (modal && modal.length > 1) {

@@ -86,7 +86,7 @@ export class CategoriesComponent implements OnInit {
     
   }
 
-  getGenres(type: String) {
+  getGenres(type: string) {
     this.moviesService.getListGenres(type).subscribe({
       next: (data: IAPIGenres) => {
         if (!data) {

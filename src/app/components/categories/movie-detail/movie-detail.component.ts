@@ -17,8 +17,8 @@ import { IMovie, IMovieResponse } from 'src/app/models/movie';
   styleUrls: ['./movie-detail.component.scss']
 })
 export class MovieDetailComponent implements OnInit {
-  movieID: Number;
-  menuType: String;
+  movieID: number;
+  menuType: string;
   movieData: IMovieDetail;
   categories = CATEGORIES;
   credits: Array<IMovieCast>;
@@ -54,7 +54,7 @@ export class MovieDetailComponent implements OnInit {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  getDetail(categories: String, id: Number) {
+  getDetail(categories: string, id: number) {
     this.moviesService.getDetail(categories, id).subscribe({
       next: (data: IMovieDetail) => {
         if (!data) {
@@ -69,7 +69,7 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
-  getCredits(categories: String, id: Number) {
+  getCredits(categories: string, id: number) {
     this.moviesService.getCredit(categories, id).subscribe({
       next: (data: IMovieCredits) => {
         if (!data || !data.cast) {
@@ -83,7 +83,7 @@ export class MovieDetailComponent implements OnInit {
     })
   }
 
-  getVideos(categories: String, id: Number) {
+  getVideos(categories: string, id: number) {
     this.moviesService.getVideos(id, categories).subscribe({
       next: (data: IAPIResponse) => {
         if (!data) {
@@ -97,7 +97,7 @@ export class MovieDetailComponent implements OnInit {
     })
   }
 
-  getSimilarMovies(categories: String, id: Number) {
+  getSimilarMovies(categories: string, id: number) {
     this.moviesService.getSimilar(categories, id).subscribe({
       next: (data: IMovieResponse) => {
         this.moviesSimilar = data.results;

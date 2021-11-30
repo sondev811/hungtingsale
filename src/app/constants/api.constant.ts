@@ -1,23 +1,21 @@
 export const API_CONFIG = {
-    BASE_URL: 'https://api.themoviedb.org/3/',
     ORIGINAL_IMAGE: (path) => `https://image.tmdb.org/t/p/original${path}`,
     W500IMAGE: (path) => `https://image.tmdb.org/t/p/w500${path}`,
-    TRAILER_VIDEO: (path) => `https://www.youtube-nocookie.com/embed/${path}`,
-    API_KEY: '88d5807254829cdff6bdb90fea9dbefb'
+    TRAILER_VIDEO: (path) => `https://www.youtube-nocookie.com/embed/${path}`
 };
 
 export const CATEGORY = {
-    MOVIE: 'movie/',
-    TV: 'tv/',
-    SEARCH: 'search/',
+    MOVIE: 'movie',
+    TV: 'tv',
+    LIST: '/list',
+    SEARCH: '/search',
     VIDEOS: '/videos',
     CREDITS: '/credits',
     SIMILAR: '/similar',
-    GENRE: 'genre/',
-    DISCOVER: 'discover/',
-    LIST: '/list',
-    DISCOVER_MOVIE: 'movie',
-    DISCOVER_TV: 'tv',
+    GENRES: '/genres',
+    DISCOVER: '/discover',
+    DETAIL: '/detail',
+    RATING: '/rating'
 };
 
 export const MOVIE_TYPE = {

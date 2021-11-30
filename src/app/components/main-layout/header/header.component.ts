@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit {
         } else {
           header.classList.remove('shrink');
         }
-
       });
     }
   }
@@ -46,8 +45,6 @@ export class HeaderComponent implements OnInit {
       });
 
     }
-    
-    
   }
 
   goToTop() {

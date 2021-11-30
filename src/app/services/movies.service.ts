@@ -9,54 +9,54 @@ import { CATEGORIES } from '../constants/base.constants';
 export class MoviesService {
   // movieTrendingList = new EventEmitter<Array<Object>>();
   constructor(private http: HttpClientService) {}
+
+  getURL(category: string) {
+    return category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV;
+  }
   
-  getListByType(category: string, typeMovie: String, page: Number = 1) {
-    const url = `${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${typeMovie}`;
-    return this.http.get(url, {page});
+  getListByType(category: string, type: string, page: number = 1) {
+    const url = `${this.getURL(category)}${CATEGORY.LIST}`;
+    return this.http.get(url, {page, type});
   }
 
-  getVideos(id: Number, category: String) {
-    const url = `${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.VIDEOS}`
-    return this.http.get(url, {});
+  getVideos(id: number, category: string) {
+    const url = `${this.getURL(category)}${CATEGORY.VIDEOS}`
+    return this.http.get(url, {id});
   }
 
-  getTVVideos(id: Number) {
-    return this.http.get(CATEGORY.TV + id + CATEGORY.VIDEOS, {});
-  }
-
-  getListByGenre(category: String , id: Number, page: Number) {
-    const url = `${CATEGORY.DISCOVER}${category === CATEGORIES.MOVIES ? CATEGORY.DISCOVER_MOVIE : CATEGORY.DISCOVER_TV}`
+  getListByGenre(category: string , id: number, page: number) {
+    const url = `${this.getURL(category)}${CATEGORY.DISCOVER}`;
     return this.http.get(url, {with_genres: id, page});
   }
 
-  getListGenres(category: String) {
-    const url = `${CATEGORY.GENRE}${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${CATEGORY.LIST}`;
+  getListGenres(category: string) {
+    const url = `${this.getURL(category)}${CATEGORY.GENRES}`;
     return this.http.get(url, {});
   }
 
-  search(query: String, page: number, category: String) {
-    const url = `${CATEGORY.SEARCH}${category === CATEGORIES.MOVIES ? CATEGORY.DISCOVER_MOVIE : CATEGORY.DISCOVER_TV}`;
+  search(query: string, page: number, category: string) {
+    const url = `${this.getURL(category)}${CATEGORY.SEARCH}`;
     return this.http.get(url, {page, query});
   }
 
-  getDetail(category: String, id: Number) {
-    return this.http.get(`${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}`, {});
+  getDetail(category: string, id: number) {
+    return this.http.get(`${this.getURL(category)}${CATEGORY.DETAIL}`, {id});
   }
 
-  getCredit(category: String, id: Number) {
-    return this.http.get(`${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.CREDITS}`, {});
+  getCredit(category: string, id: number) {
+    return this.http.get(`${this.getURL(category)}${CATEGORY.CREDITS}`, {id});
   }
 
-  getSimilar(category: String, id: Number) {
-    return this.http.get(`${category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV}${id}${CATEGORY.SIMILAR}`, {});
+  getSimilar(category: string, id: number) {
+    return this.http.get(`${this.getURL(category)}${CATEGORY.SIMILAR}`, {id});
   }
 
   getVisitors() {
     return this.http.getVisitors('https://api.countapi.xyz/hit/smovies-seven.vercel.app/visits');
   }
 
-  getIMDBRating(imdbID: string) {
-    return this.http.getIMDBDetail(imdbID);
+  getIMDBRating(id: string) {
+    return this.http.get(`${CATEGORY.RATING}`, {id});
   }
 
 }
