@@ -22,6 +22,9 @@ export class GenreComponent implements OnInit {
           return;
         }
         this.movieGenres = data.genres;
+        this.movieGenres.map((item: IGenre) => {
+          item.link = `${item.id}-${this.moviesService.handleTitle(item.name)}`;
+        });
       }
     });
     this.moviesService.getListGenres(CATEGORIES.TV_SERIES).subscribe({
@@ -30,6 +33,9 @@ export class GenreComponent implements OnInit {
           return;
         }
         this.tvGenres = data.genres;
+        this.tvGenres.map((item: IGenre) => {
+          item.link = `${item.id}-${this.moviesService.handleTitle(item.name)}`;
+        });
       }
     });
   };

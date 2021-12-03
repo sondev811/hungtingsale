@@ -5,6 +5,7 @@ export interface IMovieDetail {
     budget: number;
     genres: Array<any>;
     homepage: string;
+    name: string;
     id: number;
     imdb_id: string;
     original_language: string;
@@ -45,6 +46,7 @@ interface IMovieSeason {
     overview: string;
     poster_path: string;
     season_number: number;
+    season_name: string;
 }
 
 export interface IRatingInfo {

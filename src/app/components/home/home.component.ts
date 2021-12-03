@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
         if (!data || !data.results) {
           return;
         }
-        this.movieTrendingList = data.results;
+        this.movieTrendingList = this.moviesService.handleMovieList(data.results);
       }
     });
     // Get list movies top rate
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
         if (!data || !data.results) {
           return;
         }
-        this.movieTopRateList = data.results;
+        this.movieTopRateList = this.moviesService.handleMovieList(data.results);
       }
     });
     // Get list TV series trending
@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
         if (!data || !data.results || !data.total_pages) {
           return;
         }
-        this.tvTrendingList = data.results;
+        this.tvTrendingList = this.moviesService.handleMovieList(data.results);
       }
     });
   }

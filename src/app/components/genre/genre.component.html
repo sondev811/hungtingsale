@@ -7,15 +7,15 @@
       <h3>Movies</h3>
       <div>
         <div class="genres__movies__item" *ngFor="let item of movieGenres">
-          <span [routerLink]="['/movies/genre', item.name]">{{item.name}}</span>
+          <span [routerLink]="['/movies/genre', item.link]">{{item.name}}</span>
         </div>
       </div>
     </div>
-    <div class="genres__tv">
+    <div class="genres__tv" >
       <h3>TV-Series</h3>
-      <div>
+      <div *ngIf="tvGenres && tvGenres.length"> 
         <div class="genres__tv__item" *ngFor="let item of tvGenres">
-          <span [routerLink]="['/tv-series/genre', item.name]">{{item.name}}</span>
+          <span [routerLink]="['/tv-series/genre', item.link]">{{item.name}}</span>
         </div>
       </div>
     </div>

@@ -28,8 +28,7 @@ export class CategoriesComponent implements OnInit {
   page = 1;
   movieUpcomingList = [];
   tvSeriesList = [];
-  genre: IGenre;
-  genres: Array<IGenre>;
+  genreID: number;
   genreNameRoute: string;
   
   constructor(public moviesService: MoviesService, private route: ActivatedRoute, private router: Router) {
@@ -51,7 +50,8 @@ export class CategoriesComponent implements OnInit {
         return;
       }
       this.genreNameRoute = params['name'];
-      this.menuTypeText = this.genreNameRoute;
+      this.menuTypeText = this.moviesService.handleGenreName(this.genreNameRoute);
+      this.genreID = this.moviesService.handleId(this.genreNameRoute);
     });
     if (this.genreNameRoute) {
       this.getGenres(this.menuType);
@@ -65,7 +65,7 @@ export class CategoriesComponent implements OnInit {
             return;
           }
           this.movieList = data.results;
-          this.movieUpcomingList = this.movieList;
+          this.movieUpcomingList = this.moviesService.handleMovieList(this.movieList);
           this.totalPage = data.total_pages;
           this.totalMoviePage = this.totalPage;
         }
@@ -77,33 +77,21 @@ export class CategoriesComponent implements OnInit {
             return;
           }
           this.movieList = data.results;
-          this.tvSeriesList = this.movieList;
+          this.tvSeriesList = this.moviesService.handleMovieList(this.movieList);
           this.totalPage = data.total_pages;
           this.totalTVPage = this.totalPage;
         }
       });
     }
-    
   }
 
   getGenres(type: string) {
-    this.moviesService.getListGenres(type).subscribe({
-      next: (data: IAPIGenres) => {
-        if (!data) {
-          return;
-        }
-        this.genres = data.genres;
-        this.genre = this.genres.find((item) => {
-          return item.name === this.genreNameRoute;
-        });
-        this.moviesService.getListByGenre(this.menuType, this.genre.id, this.page).subscribe({
-          next: (data: any) => {
-            this.movieList = data.results;
-            this.totalPage = data.total_pages;
-          }
-        })
+    this.moviesService.getListByGenre(this.menuType, this.genreID, this.page).subscribe({
+      next: (data: any) => {
+        this.movieList = data.results;
+        this.totalPage = data.total_pages;
       }
-    });
+    })
   }
 
   getListByGenre() {
@@ -172,7 +160,7 @@ export class CategoriesComponent implements OnInit {
       return;
     }
     if (this.genreNameRoute) {
-      this.moviesService.getListByGenre(this.menuType, this.genre.id, this.page).subscribe({
+      this.moviesService.getListByGenre(this.menuType, this.genreID, this.page).subscribe({
         next: (data: IMovieResponse) => {
           if (!data || !data.results) {
             return;

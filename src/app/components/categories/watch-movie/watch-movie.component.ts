@@ -13,6 +13,7 @@ import { API_CONFIG } from 'src/app/constants/api.constant';
 })
 export class WatchMovieComponent implements OnInit {
   movieID: number;
+  movieLink: string;
   movieUrlIMDB: string;
   movieUrlTMDB: string;
   menuType: string;
@@ -29,7 +30,8 @@ export class WatchMovieComponent implements OnInit {
       if (!this.router.url || !params || !params['id']) {
        return; 
       }
-      this.movieID = params['id'];
+      this.movieLink = params['id'];
+      this.movieID = this.moviesService.handleId(params['id']);
       this.menuType = this.capitalizeFirstLetter(this.router.url.slice(1));
       if (this.menuType.includes(CATEGORIES.MOVIES)) {
         this.menuType = CATEGORIES.MOVIES;

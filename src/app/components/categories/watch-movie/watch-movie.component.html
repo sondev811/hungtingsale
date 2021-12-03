@@ -28,7 +28,7 @@
         <span 
           *ngFor="let item of counter(episodes.episode_count); index as i" 
           [ngClass]="{'active': i+1 == episode}"
-          [routerLink]="['/tv-series/watch', movieID, season, i+1]"
+          [routerLink]="['/tv-series/watch', movieLink, season, i+1]"
         >
           {{i + 1}}
         </span>

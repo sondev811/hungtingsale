@@ -18,6 +18,7 @@ import { IMovie, IMovieResponse } from 'src/app/models/movie';
 })
 export class MovieDetailComponent implements OnInit {
   movieID: number;
+  movieLink: string;
   menuType: string;
   movieData: IMovieDetail;
   categories = CATEGORIES;
@@ -34,7 +35,8 @@ export class MovieDetailComponent implements OnInit {
       if (!this.router.url || !params || !params['id']) {
        return; 
       }
-      this.movieID = params['id'];
+      this.movieLink = params['id'];
+      this.movieID = this.moviesService.handleId(params['id']);
       this.menuType = this.capitalizeFirstLetter(this.router.url.slice(1));
       
       if (this.menuType.includes(CATEGORIES.MOVIES)) {
@@ -49,7 +51,7 @@ export class MovieDetailComponent implements OnInit {
     });
 
   }
-  
+
   capitalizeFirstLetter(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }

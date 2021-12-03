@@ -26,7 +26,7 @@ export class MoviesService {
 
   getListByGenre(category: string , id: number, page: number) {
     const url = `${this.getURL(category)}${CATEGORY.DISCOVER}`;
-    return this.http.get(url, {with_genres: id, page});
+    return this.http.get(url, {genresID: id, page});
   }
 
   getListGenres(category: string) {
@@ -57,6 +57,36 @@ export class MoviesService {
 
   getIMDBRating(id: string) {
     return this.http.get(`${CATEGORY.RATING}`, {id});
+  }
+
+  handleMovieList(list) {
+    list.map(item => {
+      let title = this.handleTitle(item.title || item.original_title || item.original_name);
+      item.id = `${item.id}-${title}`;
+    })
+    return list;
+  }
+
+  handleTitle(title: string) {
+    let newTitle = title.replace(/:/g, '').replace(/-/g, '');
+    newTitle = newTitle.replace(/ /g, '-');
+    return newTitle;
+  }
+
+  handleId(id: string) {
+    let newId = id.split('-');
+    return parseInt(newId[0]);
+  }
+
+  handleGenreName(name: string) {
+    let newName = '';
+    let tempName = name.split('-');
+    tempName.map((item, index) => {
+      if (index !== 0) {
+        newName+= `${item} `;
+      }
+    })
+    return newName.trim();
   }
 
 }

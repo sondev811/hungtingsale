@@ -5,4 +5,5 @@ export interface IAPIGenres {
 export interface IGenre {
     id: number;
     name: string;
+    link: string;
 }

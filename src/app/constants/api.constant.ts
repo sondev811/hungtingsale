@@ -15,7 +15,7 @@ export const CATEGORY = {
     GENRES: '/genres',
     DISCOVER: '/discover',
     DETAIL: '/detail',
-    RATING: '/rating'
+    RATING: 'rating'
 };
 
 export const MOVIE_TYPE = {

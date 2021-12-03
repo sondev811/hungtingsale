@@ -42,6 +42,7 @@ export class SlidesComponent implements OnInit {
         if (data && data.results && data.results.length) {
           // this.movieService.movieTrendingList.next(data.results);
           this.movies = data.results.slice(0, 4);
+          this.movies = this.movieService.handleMovieList(this.movies);
           this.movies.map(item => {
             this.movieService.getVideos(item.id, CATEGORIES.MOVIES).subscribe({
               next: (dataTrailer: IAPIResponse) => {

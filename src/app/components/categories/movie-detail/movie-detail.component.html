@@ -24,7 +24,7 @@
       </div>
       <div *ngIf="ratingInfo">Ratings: {{ratingInfo.rating}} ({{ratingInfo.ratingCount}} votes)</div>
       <div class="movie-content__information__button" *ngIf="!movieData.seasons || !movieData.seasons.length">
-        <button [routerLink]="menuType === categories.MOVIES ? ['/movies/watch', movieID] : ['/tv-series/watch', movieID]">
+        <button [routerLink]="menuType === categories.MOVIES ? ['/movies/watch', movieLink] : ['/tv-series/watch', movieLink]">
           Watch Now
         </button>
       </div>
@@ -48,7 +48,7 @@
     <h3>Seasons: </h3>
     <div class="movie-season__item">
       <div *ngFor="let item of movieData.seasons">
-          <div *ngIf="item.episode_count > 0" [routerLink]="['/tv-series/watch', movieID, item.season_number, 1]">
+          <div *ngIf="item.episode_count > 0" [routerLink]="['/tv-series/watch', movieLink, item.season_number, 1]">
             <div class="movie-season__item--poster" >
               <img src="{{appConfig.W500IMAGE(item.poster_path)}}" alt="">
               <div class="play-button">
