@@ -36,7 +36,6 @@ export class WatchMovieComponent implements OnInit {
       this.movieLink = params['id'];
       this.movieID = this.moviesService.handleId(params['id']);
       this.menuType = this.capitalizeFirstLetter(this.router.url.slice(1));
-      this.http.loading = false;
       if (this.menuType.includes(CATEGORIES.MOVIES)) {
         this.menuType = CATEGORIES.MOVIES;
         this.moviesService.getDetail(this.menuType, this.movieID).subscribe({
@@ -47,7 +46,6 @@ export class WatchMovieComponent implements OnInit {
             this.movieData = data;
             this.movieUrlTMDB = `https://www.2embed.ru/embed/tmdb/movie?id=${this.movieID}`;
             this.movieUrlIMDB = `https://dbgo.fun/imdb.php?id=${this.movieData.imdb_id}`;
-            this.http.loading = true;
           }
         });
       } else {
@@ -67,7 +65,6 @@ export class WatchMovieComponent implements OnInit {
             this.episodes = data.seasons.find(item => item.season_number === parseFloat(this.season));
             this.movieUrlTMDB = `https://www.2embed.ru/embed/tmdb/tv?id=${this.movieID}&s=${this.season}&e=${this.episode}`;
             this.movieUrlIMDB = `https://dbgo.fun/imdbse.php?id=${this.movieData.external_ids.imdb_id}&s=${this.season}&e=${this.episode}`;
-            this.http.loading = false;
           }
         });
       }

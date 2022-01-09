@@ -61,7 +61,6 @@ export class MovieDetailComponent implements OnInit {
   }
 
   getDetail(categories: string, id: number) {
-    this.http.loading = true;
     this.moviesService.getDetail(categories, id).subscribe({
       next: (data: IMovieDetail) => {
         if (!data) {
@@ -75,7 +74,6 @@ export class MovieDetailComponent implements OnInit {
         });
         const imdbID = data.imdb_id || data.external_ids.imdb_id;
         this.getIMDBRating(imdbID);
-        this.http.loading = false;
       }
     });
   }

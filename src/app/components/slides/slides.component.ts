@@ -38,7 +38,6 @@ export class SlidesComponent implements OnInit {
   }
 
   getMovies() {
-    this.http.loading = true;
     this.movieService.getListByType(CATEGORIES.MOVIES, MOVIE_TYPE.POPULAR).subscribe({
       next: async (data: IAPIResponse) => {
         if (data && data.results && data.results.length) {
@@ -57,7 +56,6 @@ export class SlidesComponent implements OnInit {
             ? API_CONFIG.ORIGINAL_IMAGE(item.backdrop_path)
             : API_CONFIG.ORIGINAL_IMAGE(item.poster_path);
           });
-          this.http.loading = false;
         }
       }
     });

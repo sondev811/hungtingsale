@@ -16,7 +16,6 @@ export class GenreComponent implements OnInit {
   constructor(private moviesService: MoviesService, private http: HttpClientService) { }
 
   ngOnInit() {
-    this.http.loading = true;
     this.moviesService.getListGenres(CATEGORIES.MOVIES).subscribe({
       next: async(data: IAPIGenres) => {
         if (!data) {
@@ -26,7 +25,6 @@ export class GenreComponent implements OnInit {
         await this.movieGenres.map((item: IGenre) => {
           item.link = `${item.id}-${this.moviesService.handleTitle(item.name)}`;
         });
-        this.http.loading = false;
       }
     });
     this.moviesService.getListGenres(CATEGORIES.TV_SERIES).subscribe({
@@ -38,7 +36,6 @@ export class GenreComponent implements OnInit {
         this.tvGenres.map((item: IGenre) => {
           item.link = `${item.id}-${this.moviesService.handleTitle(item.name)}`;
         });
-        this.http.loading = false;
       }
     });
   }

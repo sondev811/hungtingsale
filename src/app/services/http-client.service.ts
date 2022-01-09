@@ -47,12 +47,18 @@ export class HttpClientService {
   }
 
   get(url: string, params: any) {
+    this.loading = true;
+    let loadingTimeout = null;
     url = this.getURL(url, params);
     const headers = this.getHeader();
     return new Observable(subscriber => {
       this.http.get(url, { headers })
         .subscribe({
           next: (res: Object) => {
+            clearTimeout(loadingTimeout);
+            loadingTimeout = setTimeout(() => {
+              this.loading = false;
+            }, 500);
             subscriber.next(res);
           },
           error: (err) => {
