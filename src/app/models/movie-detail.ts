@@ -35,7 +35,7 @@ export interface IMovieDetail {
         tvdb_id?: number
         tvrage_id?: number;
         twitter_id?: number;
-    }
+    };
 }
 
 interface IMovieSeason {

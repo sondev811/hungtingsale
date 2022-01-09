@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
         }
         this.viewsCount = res.value;
       }
-    })
+    });
   }
 
 }

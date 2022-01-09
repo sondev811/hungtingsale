@@ -13,14 +13,14 @@ export class MoviesService {
   getURL(category: string) {
     return category === CATEGORIES.MOVIES ? CATEGORY.MOVIE : CATEGORY.TV;
   }
-  
+
   getListByType(category: string, type: string, page: number = 1) {
     const url = `${this.getURL(category)}${CATEGORY.LIST}`;
     return this.http.get(url, {page, type});
   }
 
   getVideos(id: number, category: string) {
-    const url = `${this.getURL(category)}${CATEGORY.VIDEOS}`
+    const url = `${this.getURL(category)}${CATEGORY.VIDEOS}`;
     return this.http.get(url, {id});
   }
 
@@ -61,9 +61,9 @@ export class MoviesService {
 
   handleMovieList(list) {
     list.map(item => {
-      let title = this.handleTitle(item.title || item.original_title || item.original_name);
+      const title = this.handleTitle(item.title || item.original_title || item.original_name);
       item.id = `${item.id}-${title}`;
-    })
+    });
     return list;
   }
 
@@ -74,18 +74,18 @@ export class MoviesService {
   }
 
   handleId(id: string) {
-    let newId = id.split('-');
-    return parseInt(newId[0]);
+    const newId = id.split('-');
+    return parseInt(newId[0], 10);
   }
 
   handleGenreName(name: string) {
     let newName = '';
-    let tempName = name.split('-');
+    const tempName = name.split('-');
     tempName.map((item, index) => {
       if (index !== 0) {
-        newName+= `${item} `;
+        newName += `${item} `;
       }
-    })
+    });
     return newName.trim();
   }
 

@@ -1,3 +1,4 @@
+import { HttpClientService } from './../../services/http-client.service';
 import { MOVIE_TYPE, TV_TYPE } from './../../constants/api.constant';
 import { HomeService } from 'src/app/services/home.service';
 import { Component, Input, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
@@ -30,8 +31,10 @@ export class CategoriesComponent implements OnInit {
   tvSeriesList = [];
   genreID: number;
   genreNameRoute: string;
-  
-  constructor(public moviesService: MoviesService, private route: ActivatedRoute, private router: Router) {
+
+  constructor(public moviesService: MoviesService,
+    private route: ActivatedRoute, private http: HttpClientService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -44,8 +47,8 @@ export class CategoriesComponent implements OnInit {
     } else {
       this.menuType = CATEGORIES.TV_SERIES;
     }
-    this.menuTypeText = this.menuType
-    this.route.params.subscribe(params => { 
+    this.menuTypeText = this.menuType;
+    this.route.params.subscribe(params => {
       if (!params || !params.name) {
         return;
       }
@@ -57,7 +60,7 @@ export class CategoriesComponent implements OnInit {
       this.getGenres(this.menuType);
       return;
     }
-
+    this.http.loading = true;
     if (this.menuType === CATEGORIES.MOVIES) {
       this.moviesService.getListByType(CATEGORIES.MOVIES, MOVIE_TYPE.UP_COMING).subscribe({
         next: (data: IMovieResponse) => {
@@ -68,6 +71,7 @@ export class CategoriesComponent implements OnInit {
           this.movieUpcomingList = this.moviesService.handleMovieList(this.movieList);
           this.totalPage = data.total_pages;
           this.totalMoviePage = this.totalPage;
+          this.http.loading = false;
         }
       });
     } else {
@@ -80,6 +84,7 @@ export class CategoriesComponent implements OnInit {
           this.tvSeriesList = this.moviesService.handleMovieList(this.movieList);
           this.totalPage = data.total_pages;
           this.totalTVPage = this.totalPage;
+          this.http.loading = false;
         }
       });
     }
@@ -91,7 +96,7 @@ export class CategoriesComponent implements OnInit {
         this.movieList = data.results;
         this.totalPage = data.total_pages;
       }
-    })
+    });
   }
 
   getListByGenre() {
@@ -110,7 +115,7 @@ export class CategoriesComponent implements OnInit {
     if (keyword) {
       this.isActiveClearSearch = true;
       return;
-    } 
+    }
     this.isActiveClearSearch = false;
   }
 
@@ -127,7 +132,7 @@ export class CategoriesComponent implements OnInit {
       this.movieList = this.movieUpcomingList;
       this.totalPage = this.totalMoviePage;
       return;
-    } 
+    }
     this.movieList = this.tvSeriesList;
     this.totalPage = this.totalTVPage;
   }
@@ -135,6 +140,7 @@ export class CategoriesComponent implements OnInit {
   onSearch() {
     this.searched = true;
     this.page = 1;
+    this.http.loading = true;
     this.moviesService.search(this.keyword, this.page, this.menuType).subscribe({
       next: (data: IMovieResponse) => {
         if (!data || !data.results) {
@@ -142,12 +148,14 @@ export class CategoriesComponent implements OnInit {
         }
         this.movieList = data.results;
         this.totalPage = data.total_pages;
+        this.http.loading = false;
       }
     });
   }
 
   loadMoreMovies() {
     this.page += 1;
+    this.http.loading = true;
     if (this.keyword) {
       this.moviesService.search(this.keyword, this.page, this.menuType).subscribe({
           next: (data: IMovieResponse) => {
@@ -155,6 +163,7 @@ export class CategoriesComponent implements OnInit {
               return;
             }
             this.movieList.push(...data.results);
+            this.http.loading = false;
           }
       });
       return;
@@ -166,6 +175,7 @@ export class CategoriesComponent implements OnInit {
             return;
           }
           this.movieList.push(...data.results);
+          this.http.loading = false;
         }
       });
       return;
@@ -180,6 +190,7 @@ export class CategoriesComponent implements OnInit {
           return;
         }
         this.movieList.push(...data.results); // push array to array
+        this.http.loading = false;
       }
     });
   }

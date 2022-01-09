@@ -1,3 +1,4 @@
+import { HttpClientService } from './../../../services/http-client.service';
 import { SwiperOptions } from 'swiper';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
@@ -28,26 +29,31 @@ export class MovieDetailComponent implements OnInit {
   moviesSimilar: Array<IMovie>;
   config: SwiperOptions;
   ratingInfo: IRatingInfo;
-  constructor(private route: ActivatedRoute, private router: Router, private moviesService: MoviesService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private moviesService: MoviesService,
+    private http: HttpClientService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(async (params) => {
       if (!this.router.url || !params || !params['id']) {
-       return; 
+       return;
       }
       this.movieLink = params['id'];
       this.movieID = this.moviesService.handleId(params['id']);
       this.menuType = this.capitalizeFirstLetter(this.router.url.slice(1));
-      
+
       if (this.menuType.includes(CATEGORIES.MOVIES)) {
         this.menuType = CATEGORIES.MOVIES;
       } else {
         this.menuType = CATEGORIES.TV_SERIES;
       }
-      this.getDetail(this.menuType, this.movieID);
-      this.getCredits(this.menuType, this.movieID);
-      this.getVideos(this.menuType, this.movieID);
-      this.getSimilarMovies(this.menuType, this.movieID);
+      this.http.loading = true;
+      await this.getDetail(this.menuType, this.movieID);
+      await this.getCredits(this.menuType, this.movieID);
+      await this.getVideos(this.menuType, this.movieID);
+      await this.getSimilarMovies(this.menuType, this.movieID);
+      this.http.loading = false;
     });
 
   }
@@ -82,7 +88,7 @@ export class MovieDetailComponent implements OnInit {
           this.credits = data.cast.slice(0, 10);
         }
       }
-    })
+    });
   }
 
   getVideos(categories: string, id: number) {
@@ -96,7 +102,7 @@ export class MovieDetailComponent implements OnInit {
           item.trailer = this.appConfig.TRAILER_VIDEO(item.key);
         });
       }
-    })
+    });
   }
 
   getSimilarMovies(categories: string, id: number) {
@@ -104,7 +110,7 @@ export class MovieDetailComponent implements OnInit {
       next: (data: IMovieResponse) => {
         this.moviesSimilar = data.results;
       }
-    })
+    });
   }
 
   getIMDBRating(imdbID: string) {
@@ -115,7 +121,7 @@ export class MovieDetailComponent implements OnInit {
         }
         this.ratingInfo = data;
       }
-    })
+    });
   }
 
   scrollToSeason() {

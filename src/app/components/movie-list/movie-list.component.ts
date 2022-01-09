@@ -22,7 +22,7 @@ export class MovieListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() movieType: string;
   @Input() movieList: Array<Object>;
   @Input() category: string;
-  // @Input() config: SwiperOptions; 
+  // @Input() config: SwiperOptions;
   movieTypeText: string;
   appConfig = API_CONFIG;
   tvText = TV_TYPE_TEXT;

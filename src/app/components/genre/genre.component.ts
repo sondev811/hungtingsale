@@ -1,3 +1,4 @@
+import { HttpClientService } from './../../services/http-client.service';
 import { CATEGORIES } from 'src/app/constants/base.constants';
 import { IGenre } from './../../models/genres';
 import { Component, OnInit } from '@angular/core';
@@ -12,23 +13,24 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class GenreComponent implements OnInit {
   movieGenres: Array<IGenre>;
   tvGenres: Array<IGenre>;
-  constructor(private moviesService: MoviesService) { }
+  constructor(private moviesService: MoviesService, private http: HttpClientService) { }
 
   ngOnInit() {
-   
+    this.http.loading = true;
     this.moviesService.getListGenres(CATEGORIES.MOVIES).subscribe({
-      next: (data: IAPIGenres) => {
+      next: async(data: IAPIGenres) => {
         if (!data) {
           return;
         }
         this.movieGenres = data.genres;
-        this.movieGenres.map((item: IGenre) => {
+        await this.movieGenres.map((item: IGenre) => {
           item.link = `${item.id}-${this.moviesService.handleTitle(item.name)}`;
         });
+        this.http.loading = false;
       }
     });
     this.moviesService.getListGenres(CATEGORIES.TV_SERIES).subscribe({
-      next: (data: IAPIGenres) => {
+      next: async(data: IAPIGenres) => {
         if (!data) {
           return;
         }
@@ -36,9 +38,8 @@ export class GenreComponent implements OnInit {
         this.tvGenres.map((item: IGenre) => {
           item.link = `${item.id}-${this.moviesService.handleTitle(item.name)}`;
         });
+        this.http.loading = false;
       }
     });
-  };
-
-
+  }
 }

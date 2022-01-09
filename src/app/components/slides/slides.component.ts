@@ -1,3 +1,4 @@
+import { HttpClientService } from './../../services/http-client.service';
 import { CATEGORIES } from './../../constants/base.constants';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { API_CONFIG, MOVIE_TYPE } from 'src/app/constants/api.constant';
@@ -31,19 +32,20 @@ export class SlidesComponent implements OnInit {
     },
     grabCursor: true
   };
-  constructor(private movieService: MoviesService) { }
+  constructor(private movieService: MoviesService, private http: HttpClientService) { }
   ngOnInit() {
     this.getMovies();
   }
 
   getMovies() {
+    this.http.loading = true;
     this.movieService.getListByType(CATEGORIES.MOVIES, MOVIE_TYPE.POPULAR).subscribe({
-      next: (data: IAPIResponse) => {
+      next: async (data: IAPIResponse) => {
         if (data && data.results && data.results.length) {
           // this.movieService.movieTrendingList.next(data.results);
           this.movies = data.results.slice(0, 4);
           this.movies = this.movieService.handleMovieList(this.movies);
-          this.movies.map(item => {
+          await this.movies.map(item => {
             this.movieService.getVideos(item.id, CATEGORIES.MOVIES).subscribe({
               next: (dataTrailer: IAPIResponse) => {
                 if (dataTrailer && dataTrailer.results && dataTrailer.results.length) {
@@ -55,6 +57,7 @@ export class SlidesComponent implements OnInit {
             ? API_CONFIG.ORIGINAL_IMAGE(item.backdrop_path)
             : API_CONFIG.ORIGINAL_IMAGE(item.poster_path);
           });
+          this.http.loading = false;
         }
       }
     });
@@ -107,7 +110,7 @@ export class SlidesComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.escape', ['$event']) 
+  @HostListener('document:keydown.escape', ['$event'])
   onKeydownHandler(event: KeyboardEvent) {
     if (this.isOpenTrailer) {
       this.closeAllModal();
