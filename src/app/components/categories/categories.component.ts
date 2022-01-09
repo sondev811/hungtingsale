@@ -33,8 +33,7 @@ export class CategoriesComponent implements OnInit {
   genreNameRoute: string;
 
   constructor(public moviesService: MoviesService,
-    private route: ActivatedRoute, private http: HttpClientService,
-    private router: Router) {
+    private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {

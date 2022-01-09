@@ -32,7 +32,7 @@ export class SlidesComponent implements OnInit {
     },
     grabCursor: true
   };
-  constructor(private movieService: MoviesService, private http: HttpClientService) { }
+  constructor(private movieService: MoviesService) { }
   ngOnInit() {
     this.getMovies();
   }

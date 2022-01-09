@@ -30,10 +30,7 @@ export class MovieDetailComponent implements OnInit {
   moviesSimilar: Array<IMovie>;
   config: SwiperOptions;
   ratingInfo: IRatingInfo;
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private moviesService: MoviesService,
-    private http: HttpClientService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private moviesService: MoviesService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {

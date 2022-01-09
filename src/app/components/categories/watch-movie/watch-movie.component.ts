@@ -24,9 +24,7 @@ export class WatchMovieComponent implements OnInit {
   episodes;
   CHANNEL_ACTIVE = CHANNEL_ACTIVE;
   channelActive = CHANNEL_ACTIVE.imdb;
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private moviesService: MoviesService, private http: HttpClientService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private moviesService: MoviesService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

@@ -8,9 +8,5 @@ if (environment.production) {
   enableProdMode();
 }
 
-const loadingElement = document.querySelector('.app-loading');
-platformBrowserDynamic().bootstrapModule(AppModule)
-.then(() => loadingElement.classList.add('loaded'))
-  .then(() => setTimeout(() => loadingElement.remove(), 1000))
-  .catch(err => console.error(err));
+platformBrowserDynamic().bootstrapModule(AppModule);
 

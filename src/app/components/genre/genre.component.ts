@@ -13,7 +13,7 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class GenreComponent implements OnInit {
   movieGenres: Array<IGenre>;
   tvGenres: Array<IGenre>;
-  constructor(private moviesService: MoviesService, private http: HttpClientService) { }
+  constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
     this.moviesService.getListGenres(CATEGORIES.MOVIES).subscribe({

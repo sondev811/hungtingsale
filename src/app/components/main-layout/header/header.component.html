@@ -24,4 +24,6 @@
 <div id="toTop" class="scroll-top" (click)="goToTop()">
   <i class='bx bx-chevron-up'></i>
 </div>
-<div class="lds-dual-ring" [ngClass]="{'loading' : http.loading}"></div>
+<div class="loading" [ngClass]="{'active' : http.loading}">
+  <div class="loading__spin"></div>
+</div>
