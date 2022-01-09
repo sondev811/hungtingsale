@@ -1,3 +1,4 @@
+import { IGenre } from './../../../models/genres';
 import { HttpClientService } from './../../../services/http-client.service';
 import { SwiperOptions } from 'swiper';
 import { MoviesService } from 'src/app/services/movies.service';
@@ -35,7 +36,7 @@ export class MovieDetailComponent implements OnInit {
     private http: HttpClientService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(async (params) => {
+    this.route.params.subscribe((params) => {
       if (!this.router.url || !params || !params['id']) {
        return;
       }
@@ -48,14 +49,11 @@ export class MovieDetailComponent implements OnInit {
       } else {
         this.menuType = CATEGORIES.TV_SERIES;
       }
-      this.http.loading = true;
-      await this.getDetail(this.menuType, this.movieID);
-      await this.getCredits(this.menuType, this.movieID);
-      await this.getVideos(this.menuType, this.movieID);
-      await this.getSimilarMovies(this.menuType, this.movieID);
-      this.http.loading = false;
+      this.getDetail(this.menuType, this.movieID);
+      this.getCredits(this.menuType, this.movieID);
+      this.getVideos(this.menuType, this.movieID);
+      this.getSimilarMovies(this.menuType, this.movieID);
     });
-
   }
 
   capitalizeFirstLetter(str: string) {
@@ -63,6 +61,7 @@ export class MovieDetailComponent implements OnInit {
   }
 
   getDetail(categories: string, id: number) {
+    this.http.loading = true;
     this.moviesService.getDetail(categories, id).subscribe({
       next: (data: IMovieDetail) => {
         if (!data) {
@@ -71,8 +70,12 @@ export class MovieDetailComponent implements OnInit {
         data.backdrop_path = API_CONFIG.ORIGINAL_IMAGE(data.backdrop_path || data.poster_path);
         data.poster_path = API_CONFIG.ORIGINAL_IMAGE(data.poster_path || data.backdrop_path);
         this.movieData = data;
+        this.movieData.genres.map((item: IGenre) => {
+          item.link = `${item.id}-${this.moviesService.handleTitle(item.name)}`;
+        });
         const imdbID = data.imdb_id || data.external_ids.imdb_id;
         this.getIMDBRating(imdbID);
+        this.http.loading = false;
       }
     });
   }
@@ -105,8 +108,8 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
-  getSimilarMovies(categories: string, id: number) {
-    this.moviesService.getSimilar(categories, id).subscribe({
+  async getSimilarMovies(categories: string, id: number) {
+    await this.moviesService.getSimilar(categories, id).subscribe({
       next: (data: IMovieResponse) => {
         this.moviesSimilar = data.results;
       }

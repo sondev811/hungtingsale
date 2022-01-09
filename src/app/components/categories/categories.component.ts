@@ -91,10 +91,12 @@ export class CategoriesComponent implements OnInit {
   }
 
   getGenres(type: string) {
+    this.http.loading = true;
     this.moviesService.getListByGenre(this.menuType, this.genreID, this.page).subscribe({
       next: (data: any) => {
         this.movieList = data.results;
         this.totalPage = data.total_pages;
+        this.http.loading = false;
       }
     });
   }

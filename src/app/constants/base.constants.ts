@@ -13,4 +13,5 @@ export const EMPTY_MOVIE = {
 export const CHANNEL_ACTIVE = {
     imdb: 'IMDB',
     tmdb: 'TMDB'
-}
+};
+

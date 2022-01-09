@@ -13,7 +13,7 @@
       <div class="movie-content__information__genres">
         <span 
           *ngFor="let item of movieData.genres" 
-          [routerLink]="menuType === categories.MOVIES ? ['/movies/genre', item.name] : ['/tv-series/genre', item.name]">
+          [routerLink]="menuType === categories.MOVIES ? ['/movies/genre', item.link] : ['/tv-series/genre', item.name]">
           {{item.name}}</span>
       </div>
       <div *ngIf="movieData.release_date">
