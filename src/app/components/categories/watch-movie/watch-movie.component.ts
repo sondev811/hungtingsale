@@ -1,3 +1,4 @@
+import { IGenre } from './../../../models/genres';
 import { IMovie, IMovieResponse } from './../../../models/movie';
 import { HttpClientService } from './../../../services/http-client.service';
 import { CHANNEL_ACTIVE } from './../../../constants/base.constants';
@@ -46,6 +47,7 @@ export class WatchMovieComponent implements OnInit {
               return;
             }
             this.movieData = data;
+            this.handleGenres();
             console.log(this.movieData);
             this.movieUrlTMDB = `https://2embed.org/embed/${this.movieID}`;
             this.movieUrlIMDB = `https://dbgo.fun/imdb.php?id=${this.movieData.imdb_id}`;
@@ -65,6 +67,7 @@ export class WatchMovieComponent implements OnInit {
               return;
             }
             this.movieData = data;
+            this.handleGenres();
             this.episodes = data.seasons.find(item => item.season_number === parseFloat(this.season));
             this.movieUrlTMDB = `https://www.2embed.org/embed/${this.movieID}/${this.season}/${this.episode}`;
             console.log(this.movieUrlTMDB);
@@ -72,12 +75,20 @@ export class WatchMovieComponent implements OnInit {
           }
         });
       }
+      console.log(this.movieData);
+
       this.getSimilarMovies(this.menuType, this.movieID);
     });
   }
 
   capitalizeFirstLetter(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  handleGenres() {
+    this.movieData.genres.map((item: IGenre) => {
+      item.link = `${item.id}-${this.moviesService.handleTitle(item.name)}`;
+    });
   }
 
   counter(i: number) {

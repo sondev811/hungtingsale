@@ -76,6 +76,7 @@
                 border-radius: 20px;
                 font-size: .8rem;
                 font-weight: 600;
+                transition: .3s all;
                 background-color: $background-body;
                 &:hover {
                     background-color: $text-color;

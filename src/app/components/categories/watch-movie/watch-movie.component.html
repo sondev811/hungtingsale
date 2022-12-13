@@ -17,6 +17,12 @@
       <p>Cài đặt các extension block ads như <a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en" target="_blank">uBlock Origins</a> để trải nghiệm tốt hơn.</p>
     </div>
     <h3>{{ movieData.title || movieData.name }} <span *ngIf="season">({{episodes.name}})</span></h3>
+    <div class="watch-movie__content--genres">
+      <span 
+        *ngFor="let item of movieData.genres" 
+        [routerLink]="menuType === categories.MOVIES ? ['/movies/genre', item.link] : ['/tv-series/genre', item.name]">
+        {{item.name}}</span>
+    </div>
     <div class="watch-movie__content--release" *ngIf="movieData.release_date">
       Release date: {{ movieData.release_date }}
     </div>

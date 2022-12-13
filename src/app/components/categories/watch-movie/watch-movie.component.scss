@@ -10,81 +10,115 @@
         height: 90vh;
         padding: 0rem 9.375rem;
         @include tablet {
-            height: 44vh;
-
+          height: 44vh;
+          padding: 0rem;
+        }
+        @include tablet {
+          height: 27vh;
         }
     }
     &__content {
       padding: 0rem 9.375rem;
-        h3 {
-            font-weight: 600;
-        }
-        &--channel {
-            padding: 1rem 0;
-            *{
-                display: inline-block;
+      @include tablet {
+        padding: 0rem;
+      }
+      h3 {
+          font-weight: 600;
+      }
+      &--channel {
+          padding: 1rem 0;
+          *{
+              display: inline-block;
+          }
+          &>div {
+              div {
+                  margin-left: 10px;
+                  padding: 4px 12px;
+                  background-color: #000;
+                  font-weight: bold;
+                  border-radius: 10px;
+                  cursor: pointer;
+                  transition: .3s all;
+                  &:hover {
+                      background-color: $main-color;
+                  }
+              }
+              .active {
+                  background-color: $main-color;
+              }
+          }
+          a {
+            color: $main-color;
+          }
+          p:last-child {
+            @include mobile {
+              margin-top: 1rem;
             }
-            &>div {
-                div {
-                    margin-left: 10px;
-                    padding: 4px 12px;
-                    background-color: #000;
-                    font-weight: bold;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    transition: .3s all;
-                    &:hover {
-                        background-color: $main-color;
-                    }
-                }
-                .active {
-                    background-color: $main-color;
-                }
-            }
-            a {
+          }
+      }
+      &--release {
+          padding: 1rem 0;
+      }
+      &--episodes {
+          h3 {
+              padding-top: 1.5rem;
+          }
+          div {
+              padding: 1rem;
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+              gap: 20px;
+              span {
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 4px;
+                  background-color: #000;
+                  text-align: center;
+                  line-height: 30px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  transition: .3s all;
+                  &:hover {
+                      background-color: $main-color;
+                  }
+              }
+              .active {
+                  background-color: $main-color;
+              }
+          }
+      }
+      &--rating {
+        margin: 1rem 0;
+      }
+      &--genres {
+        padding: 1rem 0;
+        span {
+          margin-bottom: .5rem;
+          margin-right: .5rem;
+          display: inline-block;
+          cursor: pointer;
+          padding: .5rem 1.5rem;
+          border: 3px solid $text-color;
+          border-radius: 20px;
+          font-size: .8rem;
+          font-weight: 600;
+          transition: .3s all;
+          background-color: $background-body;
+          &:hover {
+              background-color: $text-color;
               color: $main-color;
-            }
-        }
-        &--release {
-            padding: 1rem 0;
-        }
-        &--episodes {
-            h3 {
-                padding-top: 1.5rem;
-            }
-            div {
-                padding: 1rem;
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
-                gap: 20px;
-                span {
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 4px;
-                    background-color: #000;
-                    text-align: center;
-                    line-height: 30px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: .3s all;
-                    &:hover {
-                        background-color: $main-color;
-                    }
-                }
-                .active {
-                    background-color: $main-color;
-                }
-            }
-        }
-        &--rating {
-          margin: 1rem 0;
-        }
+          }
+      } 
+      }
     }
 
     &__similar {
       h3 {
         padding: 1rem 9.375rem;
         font-weight: 600;
+        @include tablet {
+          padding: 1rem 0rem;
+        }
       }
     }
 }
