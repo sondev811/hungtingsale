@@ -4,7 +4,7 @@ export const CATEGORIES = {
     TV_SERIES: 'TV Series',
     GENRES: 'Genres',
     YOUTUBE: 'YouTube',
-    SIMILAR_MOVIES: 'Similar Video'
+    SIMILAR_MOVIES: 'Similar'
 };
 export const EMPTY_MOVIE = {
     list: [],

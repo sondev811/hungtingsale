@@ -1,7 +1,6 @@
 @import '../../../../scss/mixin.scss';
 @import '../../../../scss/variable.scss';
 .watch-movie {
-    padding: 0rem 9.375rem;
     @include tablet {
         padding: 0rem 3.375rem;
         padding-top: 9rem;
@@ -9,12 +8,14 @@
     padding-top: 9rem;
     &__player {
         height: 90vh;
+        padding: 0rem 9.375rem;
         @include tablet {
             height: 44vh;
 
         }
     }
     &__content {
+      padding: 0rem 9.375rem;
         h3 {
             font-weight: 600;
         }
@@ -39,6 +40,9 @@
                 .active {
                     background-color: $main-color;
                 }
+            }
+            a {
+              color: $main-color;
             }
         }
         &--release {
@@ -72,5 +76,15 @@
                 }
             }
         }
+        &--rating {
+          margin: 1rem 0;
+        }
+    }
+
+    &__similar {
+      h3 {
+        padding: 1rem 9.375rem;
+        font-weight: 600;
+      }
     }
 }

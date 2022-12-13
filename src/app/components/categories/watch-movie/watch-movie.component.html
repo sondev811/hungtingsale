@@ -14,6 +14,7 @@
         <div [ngClass]="{active: channelActive === CHANNEL_ACTIVE.imdb}" (click)="chooseChannel(CHANNEL_ACTIVE.imdb)">IMDB</div>
         <div [ngClass]="{active: channelActive === CHANNEL_ACTIVE.tmdb}" (click)="chooseChannel(CHANNEL_ACTIVE.tmdb)">TMDB</div>
       </div>
+      <p>Cài đặt các extension block ads như <a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en" target="_blank">uBlock Origins</a> để trải nghiệm tốt hơn.</p>
     </div>
     <h3>{{ movieData.title || movieData.name }} <span *ngIf="season">({{episodes.name}})</span></h3>
     <div class="watch-movie__content--release" *ngIf="movieData.release_date">
@@ -22,6 +23,7 @@
     <div class="watch-movie__content--overview">
       {{ movieData.overview }}
     </div>
+    <div class="watch-movie__content--rating" *ngIf="movieData.vote_average && movieData.vote_count">Ratings: {{movieData.vote_average}} ({{movieData.vote_count}} votes)</div>
     <div class="watch-movie__content--episodes" *ngIf="episodes">
       <h3>Episodes: </h3>
       <div>
@@ -33,6 +35,14 @@
           {{i + 1}}
         </span>
       </div>
+    </div>
+  </div>
+  <div class="watch-movie__similar" *ngIf="moviesSimilar && moviesSimilar.length">
+    <div class="atch-movie__similar--name">
+      <h3>{{categories.SIMILAR_MOVIES}}</h3>
+    </div>
+    <div class="atch-movie__similar--list">
+      <app-movie-list  [category]="menuType" [movieType]="" [movieList]="moviesSimilar"></app-movie-list>
     </div>
   </div>
 </div>
